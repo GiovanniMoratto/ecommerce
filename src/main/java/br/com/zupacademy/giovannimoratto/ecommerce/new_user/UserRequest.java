@@ -1,5 +1,7 @@
 package br.com.zupacademy.giovannimoratto.ecommerce.new_user;
 
+import br.com.zupacademy.giovannimoratto.ecommerce.validations.annotations.Unique;
+
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -13,6 +15,7 @@ public class UserRequest {
     /* Attributes */
     @NotBlank
     @Email
+    @Unique(domainClass = UserModel.class, fieldName = "login")
     private final String login;
     @NotBlank
     @Size(min = 6)

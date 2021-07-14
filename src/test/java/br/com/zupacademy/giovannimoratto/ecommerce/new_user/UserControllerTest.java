@@ -76,7 +76,7 @@ class UserControllerTest {
     // POST Request
     @ParameterizedTest
     @NullAndEmptySource
-    @ValueSource(strings = {"invalidemail.com","@invalid.com","@.com","@invalid"})
+    @ValueSource(strings = {"invalidemail.com", "@invalid.com", "@.com", "@invalid"})
     @DisplayName("400 Bad Request - When trying to POST with invalid LOGIN")
     void loginInvalidStatus400(String login) throws Exception {
         // Values to Fail Test
@@ -93,7 +93,7 @@ class UserControllerTest {
     // POST Request
     @ParameterizedTest
     @NullAndEmptySource
-    @ValueSource(strings = {"1","12","123","1234","12345"})
+    @ValueSource(strings = {"1", "12", "123", "1234", "12345"})
     @DisplayName("400 Bad Request - When trying to POST with invalid PASSWORD")
     void passwordInvalidStatus400(String password) throws Exception {
         // Values to Fail Test
@@ -111,7 +111,7 @@ class UserControllerTest {
     @Test
     @DisplayName("200 OK - Succeed and persist the New User in the Database")
     void createNewUserStatus200() throws Exception {
-        // Values to Fail Test
+        // Values to Success Test
         String login = "test@email.com";
         String password = "123456";
         String jsonRequest = gson.toJson(new UserRequest(login, password));
@@ -120,11 +120,39 @@ class UserControllerTest {
                 .characterEncoding("UTF-8")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isOk());
-        Optional<UserModel> optionalUser = repository.findByLogin(login);
+        Optional <UserModel> optionalUser = repository.findByLogin(login);
         Assertions.assertTrue(optionalUser.isPresent());
         UserModel user = optionalUser.get();
         Assertions.assertTrue(BCrypt.checkpw(password, user.getPassword()));
         Assertions.assertTrue(user.getCreatedAt().isBefore(ChronoLocalDateTime.from(ZonedDateTime.now())));
+    }
+
+    // POST Request
+    @Test
+    @DisplayName("400 Bad Request - When trying to POST with duplicate LOGIN")
+    void duplicateLoginStatus400() throws Exception {
+        // Values to Fail Test
+        String login = "duplicate@email.com";
+        String password = "123456";
+
+        UserRequest request1 = new UserRequest(login, password);
+        String jsonRequest1 = gson.toJson(request1);
+
+        UserRequest request2 = new UserRequest(login, password);
+        String jsonRequest2 = gson.toJson(request2);
+
+        mockMvc.perform(MockMvcRequestBuilders.post(urlTemplate)
+                .content(jsonRequest1)
+                .characterEncoding("UTF-8")
+                .contentType(MediaType.APPLICATION_JSON));
+
+        mockMvc.perform(MockMvcRequestBuilders.post(urlTemplate)
+                .content(jsonRequest2)
+                .characterEncoding("UTF-8")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().isBadRequest());
+
+        Assertions.assertEquals(1, repository.countByLogin(login));
     }
 
 }

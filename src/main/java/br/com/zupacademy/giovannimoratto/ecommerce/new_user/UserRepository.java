@@ -20,4 +20,6 @@ public interface UserRepository extends JpaRepository <UserModel, Long> {
     }
 
     Optional <UserModel> findByLogin(String login);
+
+    int countByLogin(String login);
 }
