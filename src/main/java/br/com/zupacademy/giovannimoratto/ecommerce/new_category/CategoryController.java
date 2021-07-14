@@ -1,4 +1,4 @@
-package br.com.zupacademy.giovannimoratto.ecommerce.new_user;
+package br.com.zupacademy.giovannimoratto.ecommerce.new_category;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,18 +13,18 @@ import javax.validation.Valid;
  */
 
 @RestController
-public class UserController {
+public class CategoryController {
 
     @Autowired
-    private UserRepository repository;
+    private CategoryRepository repository;
 
     /* Methods */
-    // POST Request - Register a new User
-    @PostMapping("/new_user") // Endpoint
+    // POST Request - Register a new Category
+    @PostMapping("/new_category") // Endpoint
     @Transactional
-    public void addNewUser(@RequestBody @Valid UserRequest request) {
-        UserModel newUser = request.toModel();
-        repository.save(newUser);
+    public void addNewCategory(@RequestBody @Valid CategoryRequest request) {
+        CategoryModel newCategory = request.toModel(repository);
+        repository.save(newCategory);
     }
 
 }

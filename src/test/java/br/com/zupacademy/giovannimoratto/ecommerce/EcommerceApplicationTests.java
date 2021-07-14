@@ -12,6 +12,7 @@ class EcommerceApplicationTests {
 
 	@Test
 	void contextLoads() {
+		EcommerceApplication.main(new String[0]);
 		Assertions.assertTrue(true);
 	}
 
