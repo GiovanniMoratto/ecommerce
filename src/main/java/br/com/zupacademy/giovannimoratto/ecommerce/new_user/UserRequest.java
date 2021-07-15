@@ -1,6 +1,7 @@
 package br.com.zupacademy.giovannimoratto.ecommerce.new_user;
 
 import br.com.zupacademy.giovannimoratto.ecommerce.validations.annotations.Unique;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -32,4 +33,8 @@ public class UserRequest {
         return new UserModel(login, password);
     }
 
+    // Convert UserRequest.class in UsernamePasswordAuthenticationToken
+    public UsernamePasswordAuthenticationToken convert() {
+        return new UsernamePasswordAuthenticationToken(login, password);
+    }
 }
