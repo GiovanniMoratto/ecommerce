@@ -1,4 +1,4 @@
-package br.com.zupacademy.giovannimoratto.ecommerce.new_user;
+package br.com.zupacademy.giovannimoratto.ecommerce.category;
 
 import com.google.gson.Gson;
 import org.junit.jupiter.api.Assertions;
@@ -7,20 +7,16 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
-import org.junit.jupiter.params.provider.ValueSource;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
-import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
-import java.time.ZonedDateTime;
-import java.time.chrono.ChronoLocalDateTime;
 import java.util.Optional;
 
 /**
@@ -30,15 +26,15 @@ import java.util.Optional;
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
-class UserControllerTest {
+class CategoryControllerTest {
 
-    private final String urlTemplate = "/new_user";
+    private final String urlTemplate = "/new_category";
     private final MockMvc mockMvc;
     private final Gson gson;
-    private final UserRepository repository;
+    private final CategoryRepository repository;
 
     @Autowired
-    UserControllerTest(MockMvc mockMvc, Gson gson, UserRepository repository) {
+    CategoryControllerTest(MockMvc mockMvc, Gson gson, CategoryRepository repository) {
         this.mockMvc = mockMvc;
         this.gson = gson;
         this.repository = repository;
@@ -76,69 +72,31 @@ class UserControllerTest {
     // POST Request
     @ParameterizedTest
     @NullAndEmptySource
-    @ValueSource(strings = {"invalidemail.com", "@invalid.com", "@.com", "@invalid"})
-    @DisplayName("400 Bad Request - When trying to POST with invalid LOGIN")
-    void loginInvalidStatus400(String login) throws Exception {
+    @DisplayName("400 Bad Request - When trying to POST with empty NAME")
+    void nameEmptyStatus400(String name) throws Exception {
         // Values to Fail Test
-        String password = "123456";
-        String jsonRequest = gson.toJson(new UserRequest(login, password));
+        Long idParentCategory = null;
+        String jsonRequest = gson.toJson(new CategoryRequest(name, idParentCategory));
         mockMvc.perform(MockMvcRequestBuilders.post(urlTemplate)
                 .content(jsonRequest)
                 .characterEncoding("UTF-8")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isBadRequest());
-        Assertions.assertTrue(repository.findByLogin(login).isEmpty());
-    }
-
-    // POST Request
-    @ParameterizedTest
-    @NullAndEmptySource
-    @ValueSource(strings = {"1", "12", "123", "1234", "12345"})
-    @DisplayName("400 Bad Request - When trying to POST with invalid PASSWORD")
-    void passwordInvalidStatus400(String password) throws Exception {
-        // Values to Fail Test
-        String login = "test@email.com";
-        String jsonRequest = gson.toJson(new UserRequest(login, password));
-        mockMvc.perform(MockMvcRequestBuilders.post(urlTemplate)
-                .content(jsonRequest)
-                .characterEncoding("UTF-8")
-                .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(MockMvcResultMatchers.status().isBadRequest());
-        Assertions.assertTrue(repository.findByLogin("test@email.com").isEmpty());
+        Assertions.assertTrue(repository.findByName(name).isEmpty());
     }
 
     // POST Request
     @Test
-    @DisplayName("200 OK - Succeed and persist the New User in the Database")
-    void createNewUserStatus200() throws Exception {
-        // Values to Success Test
-        String login = "test@email.com";
-        String password = "123456";
-        String jsonRequest = gson.toJson(new UserRequest(login, password));
-        mockMvc.perform(MockMvcRequestBuilders.post(urlTemplate)
-                .content(jsonRequest)
-                .characterEncoding("UTF-8")
-                .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(MockMvcResultMatchers.status().isOk());
-        Optional <UserModel> optionalUser = repository.findByLogin(login);
-        Assertions.assertTrue(optionalUser.isPresent());
-        UserModel user = optionalUser.get();
-        Assertions.assertTrue(BCrypt.checkpw(password, user.getPassword()));
-        Assertions.assertTrue(user.getCreatedAt().isBefore(ChronoLocalDateTime.from(ZonedDateTime.now())));
-    }
-
-    // POST Request
-    @Test
-    @DisplayName("400 Bad Request - When trying to POST with duplicate LOGIN")
-    void duplicateLoginStatus400() throws Exception {
+    @DisplayName("400 Bad Request - When trying to POST with duplicate NAME")
+    void duplicateNameStatus400() throws Exception {
         // Values to Fail Test
-        String login = "duplicate@email.com";
-        String password = "123456";
+        String name = "duplicate";
+        Long idParentCategory = null;
 
-        UserRequest request1 = new UserRequest(login, password);
+        CategoryRequest request1 = new CategoryRequest(name, idParentCategory);
         String jsonRequest1 = gson.toJson(request1);
 
-        UserRequest request2 = new UserRequest(login, password);
+        CategoryRequest request2 = new CategoryRequest(name, idParentCategory);
         String jsonRequest2 = gson.toJson(request2);
 
         mockMvc.perform(MockMvcRequestBuilders.post(urlTemplate)
@@ -152,7 +110,72 @@ class UserControllerTest {
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isBadRequest());
 
-        Assertions.assertEquals(1, repository.countByLogin(login));
+        Assertions.assertEquals(1, repository.countByName(name));
+    }
+
+    // POST Request
+    @Test
+    @DisplayName("400 Bad Request - When trying to POST with invalid idParentCategory")
+    void idParentCategoryInvalidStatus400() throws Exception {
+        // Values to Fail Test
+        String name = "test";
+        Long idParentCategory = 99L;
+        String jsonRequest = gson.toJson(new CategoryRequest(name, idParentCategory));
+        mockMvc.perform(MockMvcRequestBuilders.post(urlTemplate)
+                .content(jsonRequest)
+                .characterEncoding("UTF-8")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().isBadRequest());
+        Assertions.assertTrue(repository.findByName(name).isEmpty());
+    }
+
+    // POST Request
+    @Test
+    @DisplayName("200 OK - Succeed and persist a Category without parent")
+    void createNewCategoryNoParentStatus200() throws Exception {
+        // Values to Success Test
+        String name = "test";
+        Long idParentCategory = null;
+
+        String jsonRequest = gson.toJson(new CategoryRequest(name, idParentCategory));
+        mockMvc.perform(MockMvcRequestBuilders.post(urlTemplate)
+                .content(jsonRequest)
+                .characterEncoding("UTF-8")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().isOk());
+        Optional <CategoryModel> optionalCategory = repository.findByName(name);
+        Assertions.assertTrue(optionalCategory.isPresent());
+    }
+
+    // POST Request
+    @Test
+    @DisplayName("200 OK - Succeed and persist a Category without parent")
+    void createNewCategoryWithParentStatus200() throws Exception {
+        // Values to Success Test
+        String name1 = "test01";
+        Long idParentCategory1 = null;
+
+        CategoryRequest request1 = new CategoryRequest(name1, idParentCategory1);
+        String jsonRequest1 = gson.toJson(request1);
+
+        mockMvc.perform(MockMvcRequestBuilders.post(urlTemplate)
+                .content(jsonRequest1)
+                .characterEncoding("UTF-8")
+                .contentType(MediaType.APPLICATION_JSON));
+
+        String name2 = "test02";
+        Long idParentCategory2 = repository.findByName(name1).orElseThrow().getId();
+
+        CategoryRequest request2 = new CategoryRequest(name2, idParentCategory2);
+        String jsonRequest2 = gson.toJson(request2);
+
+        mockMvc.perform(MockMvcRequestBuilders.post(urlTemplate)
+                .content(jsonRequest2)
+                .characterEncoding("UTF-8")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().isOk());
+        Optional <CategoryModel> optionalCategory2 = repository.findByName(name2);
+        Assertions.assertTrue(optionalCategory2.isPresent());
     }
 
 }

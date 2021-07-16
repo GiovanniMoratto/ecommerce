@@ -1,4 +1,4 @@
-package br.com.zupacademy.giovannimoratto.ecommerce.security.Authentication;
+package br.com.zupacademy.giovannimoratto.ecommerce.user;
 
 import org.springframework.security.core.GrantedAuthority;
 
@@ -11,7 +11,7 @@ import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "tb_perfis_acesso")
-public class AccountProfile implements GrantedAuthority {
+public class UserProfile implements GrantedAuthority {
 
     private static final Long serialVersionUID = 1L;
 
@@ -27,10 +27,10 @@ public class AccountProfile implements GrantedAuthority {
     /* Constructors */
     // Default - JPA
     @Deprecated
-    public AccountProfile() {
+    public UserProfile() {
     }
 
-    public AccountProfile(String name) {
+    public UserProfile(String name) {
         this.name = name;
     }
 

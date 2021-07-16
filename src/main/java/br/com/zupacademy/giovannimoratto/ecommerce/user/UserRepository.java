@@ -1,4 +1,4 @@
-package br.com.zupacademy.giovannimoratto.ecommerce.new_user;
+package br.com.zupacademy.giovannimoratto.ecommerce.user;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.security.crypto.bcrypt.BCrypt;

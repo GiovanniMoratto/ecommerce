@@ -1,6 +1,5 @@
-package br.com.zupacademy.giovannimoratto.ecommerce.new_user;
+package br.com.zupacademy.giovannimoratto.ecommerce.user;
 
-import br.com.zupacademy.giovannimoratto.ecommerce.validations.annotations.Unique;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 
 import javax.validation.constraints.Email;
@@ -11,30 +10,24 @@ import javax.validation.constraints.Size;
  * @Author giovanni.moratto
  */
 
-public class UserRequest {
+public class UserLoginRequest {
 
     /* Attributes */
     @NotBlank
     @Email
-    @Unique(domainClass = UserModel.class, fieldName = "login")
     private final String login;
     @NotBlank
     @Size(min = 6)
     private final String password;
 
-    public UserRequest(@NotBlank @Email String login, @NotBlank @Size(min = 6) String password) {
+    public UserLoginRequest(String login, String password) {
         this.login = login;
         this.password = password;
-    }
-
-    /* Methods */
-    // Convert UserRequest.class in UserModel.class
-    public UserModel toModel() {
-        return new UserModel(login, password);
     }
 
     // Convert UserRequest.class in UsernamePasswordAuthenticationToken
     public UsernamePasswordAuthenticationToken convert() {
         return new UsernamePasswordAuthenticationToken(login, password);
     }
+
 }

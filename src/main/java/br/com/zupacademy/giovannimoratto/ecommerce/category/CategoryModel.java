@@ -1,4 +1,4 @@
-package br.com.zupacademy.giovannimoratto.ecommerce.new_category;
+package br.com.zupacademy.giovannimoratto.ecommerce.category;
 
 import javax.persistence.*;
 

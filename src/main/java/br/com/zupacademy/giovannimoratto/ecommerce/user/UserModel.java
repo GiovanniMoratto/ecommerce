@@ -1,6 +1,5 @@
-package br.com.zupacademy.giovannimoratto.ecommerce.new_user;
+package br.com.zupacademy.giovannimoratto.ecommerce.user;
 
-import br.com.zupacademy.giovannimoratto.ecommerce.security.Authentication.AccountProfile;
 import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -21,7 +20,9 @@ import java.util.List;
 public class UserModel implements UserDetails {
 
     private static final Long serialVersionUID = 1L;
-
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinColumn(name = "tb_usuario-perfil")
+    private final List <UserProfile> profiles = new ArrayList <>();
     /* Attributes */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,8 +36,6 @@ public class UserModel implements UserDetails {
     @PastOrPresent
     @Column(name = "DATA_CRIACAO", nullable = false)
     private LocalDateTime createdAt;
-    @ManyToMany(fetch = FetchType.EAGER)
-    private final List<AccountProfile> profiles = new ArrayList <AccountProfile>();
 
     /* Constructors */
     // Default - JPA
@@ -50,14 +49,13 @@ public class UserModel implements UserDetails {
         this.password = UserRepository.userPasswordEncoder(requestPassword);
     }
 
-    /* Methods */
     // implements UserDetails
     @Override
     public Collection <? extends GrantedAuthority> getAuthorities() {
         return profiles;
     }
 
-    @Override
+    // Check for Hash in UserControllerTest
     public String getPassword() {
         return password;
     }
@@ -87,10 +85,12 @@ public class UserModel implements UserDetails {
         return true;
     }
 
-    /* Getters and Setters */
     // Check for date Before or equal to Present in UserControllerTest
     public LocalDateTime getCreatedAt() {
         return createdAt;
     }
 
+    public Long getId() {
+        return id;
+    }
 }

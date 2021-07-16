@@ -1,4 +1,4 @@
-package br.com.zupacademy.giovannimoratto.ecommerce.new_category;
+package br.com.zupacademy.giovannimoratto.ecommerce.category;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

@@ -1,10 +1,9 @@
-package br.com.zupacademy.giovannimoratto.ecommerce.new_category;
+package br.com.zupacademy.giovannimoratto.ecommerce.category;
 
 import br.com.zupacademy.giovannimoratto.ecommerce.validations.annotations.ExistsId;
 import br.com.zupacademy.giovannimoratto.ecommerce.validations.annotations.Unique;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Positive;
 
 /**
  * @Author giovanni.moratto

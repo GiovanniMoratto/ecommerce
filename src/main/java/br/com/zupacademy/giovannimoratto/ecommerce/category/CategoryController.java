@@ -1,4 +1,4 @@
-package br.com.zupacademy.giovannimoratto.ecommerce.new_category;
+package br.com.zupacademy.giovannimoratto.ecommerce.category;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
