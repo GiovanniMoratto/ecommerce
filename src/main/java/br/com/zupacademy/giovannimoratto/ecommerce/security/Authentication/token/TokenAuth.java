@@ -1,5 +1,6 @@
-package br.com.zupacademy.giovannimoratto.ecommerce.security.Authentication;
+package br.com.zupacademy.giovannimoratto.ecommerce.security.Authentication.token;
 
+import br.com.zupacademy.giovannimoratto.ecommerce.security.Authentication.AuthService;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -10,18 +11,17 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Optional;
 
 /**
  * @Author giovanni.moratto
  */
 
-public class TokenAuthentication extends OncePerRequestFilter {
+public class TokenAuth extends OncePerRequestFilter {
 
     private final TokenService tokenService;
-    private final AuthenticationService authService;
+    private final AuthService authService;
 
-    public TokenAuthentication(TokenService tokenService, AuthenticationService authService) {
+    public TokenAuth(TokenService tokenService, AuthService authService) {
         this.tokenService = tokenService;
         this.authService = authService;
     }
@@ -29,19 +29,15 @@ public class TokenAuthentication extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
                                     FilterChain filterChain) throws ServletException, IOException {
-        String token = getTokenRequest(request).get();
+        String token = getTokenRequest(request);
         if (tokenService.isValid(token)) {
             userAuthenticate(token);
         }
         filterChain.doFilter(request, response);
     }
 
-    private Optional <String> getTokenRequest(HttpServletRequest request) {
-        String authToken = request.getHeader("Authorization");
-        if (authToken == null || authToken.isEmpty() || !authToken.startsWith("Bearer ")) {
-            return Optional.empty();
-        }
-        return Optional.of(authToken.substring(7, authToken.length()));
+    private String getTokenRequest(HttpServletRequest request) {
+        return request.getHeader("Authorization");
     }
 
     private void userAuthenticate(String token) {

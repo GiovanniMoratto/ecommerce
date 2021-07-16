@@ -1,4 +1,4 @@
-package br.com.zupacademy.giovannimoratto.ecommerce.category;
+package br.com.zupacademy.giovannimoratto.ecommerce.add_category;
 
 import br.com.zupacademy.giovannimoratto.ecommerce.validations.annotations.ExistsId;
 import br.com.zupacademy.giovannimoratto.ecommerce.validations.annotations.Unique;

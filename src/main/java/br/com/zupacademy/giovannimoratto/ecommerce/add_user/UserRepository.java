@@ -1,6 +1,7 @@
-package br.com.zupacademy.giovannimoratto.ecommerce.user;
+package br.com.zupacademy.giovannimoratto.ecommerce.add_user;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Repository;
 
@@ -22,4 +23,5 @@ public interface UserRepository extends JpaRepository <UserModel, Long> {
     Optional <UserModel> findByLogin(String login);
 
     int countByLogin(String login);
+
 }

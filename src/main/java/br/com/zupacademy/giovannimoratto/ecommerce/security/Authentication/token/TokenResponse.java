@@ -1,4 +1,4 @@
-package br.com.zupacademy.giovannimoratto.ecommerce.security.Authentication;
+package br.com.zupacademy.giovannimoratto.ecommerce.security.Authentication.token;
 
 /**
  * @Author giovanni.moratto

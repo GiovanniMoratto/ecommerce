@@ -1,7 +1,6 @@
-package br.com.zupacademy.giovannimoratto.ecommerce.user;
+package br.com.zupacademy.giovannimoratto.ecommerce.add_user;
 
 import br.com.zupacademy.giovannimoratto.ecommerce.validations.annotations.Unique;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -11,7 +10,7 @@ import javax.validation.constraints.Size;
  * @Author giovanni.moratto
  */
 
-public class UserCreateRequest {
+public class UserRequest {
 
     /* Attributes */
     @NotBlank
@@ -22,7 +21,7 @@ public class UserCreateRequest {
     @Size(min = 6)
     private final String password;
 
-    public UserCreateRequest(@NotBlank @Email String login, @NotBlank @Size(min = 6) String password) {
+    public UserRequest(@NotBlank @Email String login, @NotBlank @Size(min = 6) String password) {
         this.login = login;
         this.password = password;
     }

@@ -1,8 +1,12 @@
-package br.com.zupacademy.giovannimoratto.ecommerce.user;
+package br.com.zupacademy.giovannimoratto.ecommerce.security.Authentication;
 
-import br.com.zupacademy.giovannimoratto.ecommerce.security.Authentication.TokenResponse;
-import br.com.zupacademy.giovannimoratto.ecommerce.security.Authentication.TokenService;
+import br.com.zupacademy.giovannimoratto.ecommerce.security.Authentication.token.TokenResponse;
+import br.com.zupacademy.giovannimoratto.ecommerce.security.Authentication.token.TokenService;
+import br.com.zupacademy.giovannimoratto.ecommerce.security.Authentication.login.LoginRequest;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -10,47 +14,36 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.transaction.Transactional;
 import javax.validation.Valid;
-import java.net.URI;
 
 /**
  * @Author giovanni.moratto
  */
 
 @RestController
-public class UserController {
+@RequestMapping("/auth")
+public class AuthController {
 
-    private final UserRepository repository;
+    private static final Logger log = LoggerFactory.getLogger(AuthController.class);
     private final AuthenticationManager authManager;
     private final TokenService tokenService;
 
     @Autowired
-    public UserController(UserRepository repository, AuthenticationManager authManager, TokenService tokenService) {
-        this.repository = repository;
+    public AuthController(AuthenticationManager authManager, TokenService tokenService) {
         this.authManager = authManager;
         this.tokenService = tokenService;
     }
 
     /* Methods */
-    // POST Request - Register a new User
-    @PostMapping("/new_user") // Endpoint
-    @Transactional
-    public ResponseEntity<?> addNewUser(@RequestBody @Valid UserCreateRequest request, UriComponentsBuilder uriBuilder) {
-        UserModel newUser = request.toModel();
-        repository.save(newUser);
-
-        URI uri = uriBuilder.path("/user/{id}").buildAndExpand(newUser.getId()).toUri();
-        return ResponseEntity.created(uri).body(new UserCreateResponse(newUser));
-    }
-
     // POST Request - Authenticate User
-    @PostMapping("/auth")
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
     @Transactional
-    public ResponseEntity <TokenResponse> authenticate(@RequestBody @Valid UserLoginRequest request) {
+    public ResponseEntity <TokenResponse> userAuthenticate(@RequestBody @Valid LoginRequest request) {
         UsernamePasswordAuthenticationToken userData = request.convert();
         try {
             Authentication authenticate = authManager.authenticate(userData);

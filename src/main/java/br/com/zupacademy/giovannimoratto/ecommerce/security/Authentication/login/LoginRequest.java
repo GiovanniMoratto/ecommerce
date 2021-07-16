@@ -1,4 +1,4 @@
-package br.com.zupacademy.giovannimoratto.ecommerce.user;
+package br.com.zupacademy.giovannimoratto.ecommerce.security.Authentication.login;
 
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 
@@ -10,7 +10,7 @@ import javax.validation.constraints.Size;
  * @Author giovanni.moratto
  */
 
-public class UserLoginRequest {
+public class LoginRequest {
 
     /* Attributes */
     @NotBlank
@@ -20,7 +20,7 @@ public class UserLoginRequest {
     @Size(min = 6)
     private final String password;
 
-    public UserLoginRequest(String login, String password) {
+    public LoginRequest(String login, String password) {
         this.login = login;
         this.password = password;
     }

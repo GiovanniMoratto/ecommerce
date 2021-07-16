@@ -1,4 +1,4 @@
-package br.com.zupacademy.giovannimoratto.ecommerce.security.Authentication;
+package br.com.zupacademy.giovannimoratto.ecommerce.security.Authentication.token;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;

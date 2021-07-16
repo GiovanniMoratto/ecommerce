@@ -1,4 +1,4 @@
-package br.com.zupacademy.giovannimoratto.ecommerce.category;
+package br.com.zupacademy.giovannimoratto.ecommerce.add_category;
 
 import com.google.gson.Gson;
 import org.junit.jupiter.api.Assertions;

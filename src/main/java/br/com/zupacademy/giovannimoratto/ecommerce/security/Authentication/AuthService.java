@@ -1,7 +1,8 @@
 package br.com.zupacademy.giovannimoratto.ecommerce.security.Authentication;
 
-import br.com.zupacademy.giovannimoratto.ecommerce.user.UserModel;
-import br.com.zupacademy.giovannimoratto.ecommerce.user.UserRepository;
+import br.com.zupacademy.giovannimoratto.ecommerce.add_user.UserModel;
+import br.com.zupacademy.giovannimoratto.ecommerce.add_user.UserRepository;
+import br.com.zupacademy.giovannimoratto.ecommerce.security.Authentication.login.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -15,16 +16,20 @@ import java.util.Optional;
  */
 
 @Service
-public class AuthenticationService implements UserDetailsService {
+public class AuthService implements UserDetailsService {
 
     @Autowired
     private UserRepository repository;
 
+    @Autowired
+    private ObjectMapper objectMapper;
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Optional <UserModel> optionalLogin = repository.findByLogin(username);
-        if (optionalLogin.isPresent()){
-            return optionalLogin.get();
+        System.out.println(optionalLogin);
+        if (optionalLogin.isPresent()) {
+            return objectMapper.map(optionalLogin.get());
         }
         throw new UsernameNotFoundException("Dados inválidos!");
     }

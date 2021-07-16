@@ -1,4 +1,4 @@
-package br.com.zupacademy.giovannimoratto.ecommerce.user;
+package br.com.zupacademy.giovannimoratto.ecommerce.add_user;
 
 import com.google.gson.Gson;
 import org.junit.jupiter.api.Assertions;
@@ -81,7 +81,7 @@ class UserControllerTest {
     void loginInvalidStatus400(String login) throws Exception {
         // Values to Fail Test
         String password = "123456";
-        String jsonRequest = gson.toJson(new UserCreateRequest(login, password));
+        String jsonRequest = gson.toJson(new UserRequest(login, password));
         mockMvc.perform(MockMvcRequestBuilders.post(urlTemplate)
                 .content(jsonRequest)
                 .characterEncoding("UTF-8")
@@ -98,7 +98,7 @@ class UserControllerTest {
     void passwordInvalidStatus400(String password) throws Exception {
         // Values to Fail Test
         String login = "test@email.com";
-        String jsonRequest = gson.toJson(new UserCreateRequest(login, password));
+        String jsonRequest = gson.toJson(new UserRequest(login, password));
         mockMvc.perform(MockMvcRequestBuilders.post(urlTemplate)
                 .content(jsonRequest)
                 .characterEncoding("UTF-8")
@@ -114,7 +114,7 @@ class UserControllerTest {
         // Values to Success Test
         String login = "test@email.com";
         String password = "123456";
-        String jsonRequest = gson.toJson(new UserCreateRequest(login, password));
+        String jsonRequest = gson.toJson(new UserRequest(login, password));
         mockMvc.perform(MockMvcRequestBuilders.post(urlTemplate)
                 .content(jsonRequest)
                 .characterEncoding("UTF-8")
@@ -135,10 +135,10 @@ class UserControllerTest {
         String login = "duplicate@email.com";
         String password = "123456";
 
-        UserCreateRequest request1 = new UserCreateRequest(login, password);
+        UserRequest request1 = new UserRequest(login, password);
         String jsonRequest1 = gson.toJson(request1);
 
-        UserCreateRequest request2 = new UserCreateRequest(login, password);
+        UserRequest request2 = new UserRequest(login, password);
         String jsonRequest2 = gson.toJson(request2);
 
         mockMvc.perform(MockMvcRequestBuilders.post(urlTemplate)
