@@ -32,7 +32,7 @@ import java.util.Optional;
 @AutoConfigureMockMvc
 class UserControllerTest {
 
-    private final String urlTemplate = "/new_user";
+    private final String urlTemplate = "/api/new_user";
     private final MockMvc mockMvc;
     private final Gson gson;
     private final UserRepository repository;

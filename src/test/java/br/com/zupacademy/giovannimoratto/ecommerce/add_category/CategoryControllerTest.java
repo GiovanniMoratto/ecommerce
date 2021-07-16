@@ -28,7 +28,7 @@ import java.util.Optional;
 @AutoConfigureMockMvc
 class CategoryControllerTest {
 
-    private final String urlTemplate = "/new_category";
+    private final String urlTemplate = "/api/new_category";
     private final MockMvc mockMvc;
     private final Gson gson;
     private final CategoryRepository repository;
