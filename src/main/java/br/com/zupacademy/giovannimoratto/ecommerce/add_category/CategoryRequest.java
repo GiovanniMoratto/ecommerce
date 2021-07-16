@@ -18,12 +18,14 @@ public class CategoryRequest {
     @ExistsId(domainClass = CategoryModel.class)
     private final Long idParentCategory;
 
+    /* Constructors */
     public CategoryRequest(String name, Long idParentCategory) {
         this.name = name;
         this.idParentCategory = idParentCategory;
     }
 
     /* Methods */
+    // Convert CategoryRequest.class in CategoryModel.class
     public CategoryModel toModel(CategoryRepository repository) {
         if (idParentCategory != null) {
             CategoryModel optionalCategory = repository.findById(idParentCategory).orElseThrow();

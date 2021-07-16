@@ -13,6 +13,7 @@ import java.io.IOException;
 
 public class AuthEntryPoint implements org.springframework.security.web.AuthenticationEntryPoint {
 
+    /* Methods */
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response,
                          AuthenticationException authException) throws IOException, ServletException {

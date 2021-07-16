@@ -21,6 +21,7 @@ public class UserRequest {
     @Size(min = 6)
     private final String password;
 
+    /* Constructors */
     public UserRequest(@NotBlank @Email String login, @NotBlank @Size(min = 6) String password) {
         this.login = login;
         this.password = password;

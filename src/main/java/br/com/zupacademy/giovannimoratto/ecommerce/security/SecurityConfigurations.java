@@ -34,7 +34,6 @@ import java.io.IOException;
 @EnableWebSecurity
 @Configuration
 public class SecurityConfigurations extends WebSecurityConfigurerAdapter {
-    // Herança para sobreescrever métodos
 
     private static final Logger Log = LoggerFactory.getLogger(SecurityConfigurations.class);
     private final AuthService authService;
@@ -46,7 +45,8 @@ public class SecurityConfigurations extends WebSecurityConfigurerAdapter {
         this.tokenService = tokenService;
     }
 
-    // Configurações de Autenticação - Login
+    /* Methods */
+    // Authentication Settings - Login
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(authService).passwordEncoder(new BCryptPasswordEncoder());
@@ -58,13 +58,13 @@ public class SecurityConfigurations extends WebSecurityConfigurerAdapter {
         return super.authenticationManager();
     }
 
-    // Configuração de recursos estáticos (JS - CSS - Imagens - Videos - etc)
+    // Settings of static resources (JS - CSS - Images - Videos - etc)
     @Override
     public void configure(WebSecurity web) throws Exception {
 
     }
 
-    // Configurações de Autorização - Acessos a recursos e perfis de acesso
+    // Authorization Settings - Resource Accesses and Access Profiles
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
@@ -97,4 +97,5 @@ public class SecurityConfigurations extends WebSecurityConfigurerAdapter {
                               );
         }
     }
+
 }

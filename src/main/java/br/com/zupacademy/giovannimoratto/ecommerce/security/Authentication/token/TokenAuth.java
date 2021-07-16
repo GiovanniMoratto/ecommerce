@@ -18,14 +18,17 @@ import java.io.IOException;
 
 public class TokenAuth extends OncePerRequestFilter {
 
+    /* Attributes */
     private final TokenService tokenService;
     private final AuthService authService;
 
+    /* Constructors */
     public TokenAuth(TokenService tokenService, AuthService authService) {
         this.tokenService = tokenService;
         this.authService = authService;
     }
 
+    /* Methods */
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
                                     FilterChain filterChain) throws ServletException, IOException {
@@ -36,10 +39,12 @@ public class TokenAuth extends OncePerRequestFilter {
         filterChain.doFilter(request, response);
     }
 
+    // Get token from the logged in user header.
     private String getTokenRequest(HttpServletRequest request) {
         return request.getHeader("Authorization");
     }
 
+    // Authenticate token by getting username and checking the database.
     private void userAuthenticate(String token) {
         String username = tokenService.getUserName(token);
         UserDetails user = authService.loadUserByUsername(username);

@@ -50,7 +50,7 @@ public class UserModel {
         return createdAt;
     }
 
-    // Logged.class
+    // Get username to Logged.class
     public String getUsername() {
         return login;
     }

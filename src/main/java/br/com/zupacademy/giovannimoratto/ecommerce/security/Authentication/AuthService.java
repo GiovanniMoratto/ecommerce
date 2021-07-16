@@ -1,15 +1,17 @@
 package br.com.zupacademy.giovannimoratto.ecommerce.security.Authentication;
 
-import br.com.zupacademy.giovannimoratto.ecommerce.add_user.UserModel;
-import br.com.zupacademy.giovannimoratto.ecommerce.add_user.UserRepository;
 import br.com.zupacademy.giovannimoratto.ecommerce.security.Authentication.login.ObjectMapper;
+import io.jsonwebtoken.lang.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import java.util.List;
 
 /**
  * @Author giovanni.moratto
@@ -18,20 +20,29 @@ import java.util.Optional;
 @Service
 public class AuthService implements UserDetailsService {
 
-    @Autowired
-    private UserRepository repository;
+    @PersistenceContext
+    private EntityManager em;
 
     @Autowired
     private ObjectMapper objectMapper;
 
+    @Value("${security.username-query}")
+    private String query;
+
+    /* Methods */
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Optional <UserModel> optionalLogin = repository.findByLogin(username);
-        System.out.println(optionalLogin);
-        if (optionalLogin.isPresent()) {
-            return objectMapper.map(optionalLogin.get());
+        List <?> users = em.createQuery(query).setParameter("username", username).getResultList();
+        Assert.isTrue(users.size() <= 1, "[Warning]: Another user with the same " +
+                                         "username[" + username + "] is already logged in.");
+        if (userNotFound(users)) {
+            throw new UsernameNotFoundException("Dados inválidos!");
         }
-        throw new UsernameNotFoundException("Dados inválidos!");
+        return objectMapper.map(users.get(0));
+    }
+
+    private boolean userNotFound(List <?> users) {
+        return users.isEmpty();
     }
 
 }

@@ -18,13 +18,16 @@ import java.util.Date;
 @Service
 public class TokenService {
 
-    @Value("${ecommerce.jwt.expiration}")
+    /* Attributes */
+    @Value("${token.expiration}")
     private Long expirationInMillis;
 
-    @Value("${ecommerce.jwt.secret}")
+    @Value("${token.secret}")
     private String secret;
 
-    public String build(Authentication authenticate) {
+    /* Methods */
+    // Build token authenticated
+    public String buildToken(Authentication authenticate) {
         UserDetails user = (UserDetails) authenticate.getPrincipal();
         final Date now = new Date();
         final Date expiration = new Date(now.getTime() + expirationInMillis);
@@ -37,6 +40,7 @@ public class TokenService {
                 .compact();
     }
 
+    // Check if it's a valid token key using the secret key
     public boolean isValid(String token) {
         try {
             Jwts.parser().setSigningKey(secret).parseClaimsJws(token);
@@ -46,10 +50,10 @@ public class TokenService {
         }
     }
 
+    // Extracts username to perform future database search
     public String getUserName(String token) {
         Claims claims = Jwts.parser().setSigningKey(this.secret)
                 .parseClaimsJws(token).getBody();
-
         return claims.getSubject();
     }
 

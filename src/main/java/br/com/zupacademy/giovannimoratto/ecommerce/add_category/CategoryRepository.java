@@ -12,7 +12,9 @@ import java.util.Optional;
 @Repository
 public interface CategoryRepository extends JpaRepository <CategoryModel, Long> {
 
+    /* Methods */
     Optional <CategoryModel> findByName(String name);
 
     int countByName(String name);
+
 }

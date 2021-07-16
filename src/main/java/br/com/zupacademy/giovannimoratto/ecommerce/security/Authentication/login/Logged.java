@@ -14,14 +14,17 @@ import java.util.List;
 
 public class Logged implements UserDetails {
 
+    /* Attributes */
     private UserModel user;
     private User userDetails;
 
+    /* Constructors */
     public Logged(UserModel userModel) {
         this.user = userModel;
         this.userDetails = new User(userModel.getUsername(), userModel.getPassword(), List.of());
     }
 
+    /* Methods */
     @Override
     public Collection <GrantedAuthority> getAuthorities() {
         return userDetails.getAuthorities();

@@ -20,6 +20,7 @@ public class LoginRequest {
     @Size(min = 6)
     private final String password;
 
+    /* Constructors */
     public LoginRequest(String login, String password) {
         this.login = login;
         this.password = password;
