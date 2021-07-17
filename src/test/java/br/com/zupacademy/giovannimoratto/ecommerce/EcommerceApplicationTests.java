@@ -1,6 +1,5 @@
 package br.com.zupacademy.giovannimoratto.ecommerce;
 
-
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
@@ -11,10 +10,9 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @SpringBootTest
 class EcommerceApplicationTests {
 
-	@Test
-	void contextLoads() {
-		EcommerceApplication.main(new String[0]);
-		Assertions.assertTrue(true);
-	}
+    @Test
+    void contextLoads() {
+        Assertions.assertTrue(true);
+    }
 
 }

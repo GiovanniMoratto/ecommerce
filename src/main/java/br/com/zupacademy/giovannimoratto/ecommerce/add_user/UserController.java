@@ -24,7 +24,7 @@ public class UserController {
 
     /* Methods */
     // POST Request - Register a new User
-    @PostMapping("/new_user") // Endpoint
+    @PostMapping("/new-user") // Endpoint
     @Transactional
     public ResponseEntity <?> addNewUser(@RequestBody @Valid UserRequest request) {
         UserModel newUser = request.toModel();

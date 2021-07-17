@@ -45,7 +45,8 @@ public class AuthController {
             String token = tokenService.buildToken(authenticated);
             return ResponseEntity.ok(new TokenResponse(token, "Bearer"));
         } catch (AuthenticationException e) {
-            return ResponseEntity.badRequest().build();
+            return ResponseEntity.status(401).body(
+                    new TokenResponse("Invalid login or password!", "ERROR"));
         }
     }
 

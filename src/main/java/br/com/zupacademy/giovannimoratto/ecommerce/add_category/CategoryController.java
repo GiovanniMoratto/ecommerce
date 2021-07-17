@@ -24,7 +24,7 @@ public class CategoryController {
 
     /* Methods */
     // POST Request - Register a new Category
-    @PostMapping("/new_category") // Endpoint
+    @PostMapping("/new-category") // Endpoint
     @Transactional
     public ResponseEntity <?> addNewCategory(@RequestBody @Valid CategoryRequest request) {
         CategoryModel newCategory = request.toModel(repository);
