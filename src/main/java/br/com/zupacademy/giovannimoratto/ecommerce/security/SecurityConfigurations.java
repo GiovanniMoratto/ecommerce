@@ -3,7 +3,6 @@ package br.com.zupacademy.giovannimoratto.ecommerce.security;
 import br.com.zupacademy.giovannimoratto.ecommerce.security.Authentication.AuthService;
 import br.com.zupacademy.giovannimoratto.ecommerce.security.Authentication.token.TokenAuth;
 import br.com.zupacademy.giovannimoratto.ecommerce.security.Authentication.token.TokenService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -28,7 +27,6 @@ public class SecurityConfigurations extends WebSecurityConfigurerAdapter {
     private final AuthService authService;
     private final TokenService tokenService;
 
-    @Autowired
     public SecurityConfigurations(AuthService authService, TokenService tokenService) {
         this.authService = authService;
         this.tokenService = tokenService;

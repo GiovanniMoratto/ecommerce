@@ -36,7 +36,7 @@ public class AuthService implements UserDetailsService {
         Assert.isTrue(users.size() <= 1, "[Warning]: Another user with the same " +
                                          "username[" + username + "] is already logged in.");
         if (userNotFound(users)) {
-            throw new UsernameNotFoundException("Dados inválidos!");
+            throw new UsernameNotFoundException("Invalid login or password!");
         }
         return objectMapper.map(users.get(0));
     }

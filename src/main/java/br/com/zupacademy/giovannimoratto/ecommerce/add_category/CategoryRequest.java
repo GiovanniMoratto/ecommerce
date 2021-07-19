@@ -2,6 +2,7 @@ package br.com.zupacademy.giovannimoratto.ecommerce.add_category;
 
 import br.com.zupacademy.giovannimoratto.ecommerce.validations.annotations.ExistsId;
 import br.com.zupacademy.giovannimoratto.ecommerce.validations.annotations.Unique;
+import br.com.zupacademy.giovannimoratto.ecommerce.validations.exception_handler.SearchException;
 
 import javax.validation.constraints.NotBlank;
 
@@ -28,7 +29,8 @@ public class CategoryRequest {
     // Convert CategoryRequest.class in CategoryModel.class
     public CategoryModel toModel(CategoryRepository repository) {
         if (idParentCategory != null) {
-            CategoryModel optionalCategory = repository.findById(idParentCategory).orElseThrow();
+            CategoryModel optionalCategory = repository.findById(idParentCategory).orElseThrow(() ->
+                    new SearchException("Category does not exists."));
             return new CategoryModel(name, optionalCategory);
         }
         return new CategoryModel(name);

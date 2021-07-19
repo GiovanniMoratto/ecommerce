@@ -41,7 +41,11 @@ public class TokenAuth extends OncePerRequestFilter {
 
     // Get token from the logged in user header.
     private String getTokenRequest(HttpServletRequest request) {
-        return request.getHeader("Authorization");
+        String token = request.getHeader("Authorization");
+        if (token == null || token.isEmpty() || !token.startsWith("Bearer ")) {
+            return null;
+        }
+        return token.substring(7, token.length());
     }
 
     // Authenticate token by getting username and checking the database.
