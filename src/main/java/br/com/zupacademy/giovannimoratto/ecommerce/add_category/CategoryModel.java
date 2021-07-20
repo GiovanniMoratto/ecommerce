@@ -28,9 +28,9 @@ public class CategoryModel {
     }
 
     // Case 1 - Set CategoryRequest.class values in CategoryModel.class
-    public CategoryModel(String name, CategoryModel parentCategory) {
-        this.name = name;
-        this.parentCategory = parentCategory;
+    public CategoryModel(String requestName, CategoryModel requestParentCategory) {
+        this.name = requestName;
+        this.parentCategory = requestParentCategory;
     }
 
     // Case 2 - Set CategoryRequest.class values in CategoryModel.class
