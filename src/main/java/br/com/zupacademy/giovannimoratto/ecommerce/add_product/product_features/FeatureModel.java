@@ -4,6 +4,7 @@ import br.com.zupacademy.giovannimoratto.ecommerce.add_product.ProductModel;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.Objects;
 
 /**
  * @Author giovanni.moratto
@@ -38,6 +39,21 @@ public class FeatureModel {
         this.name = name;
         this.description = description;
         this.product = product;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (!(o instanceof FeatureModel))
+            return false;
+        FeatureModel that = (FeatureModel) o;
+        return name.equals(that.name) && description.equals(that.description);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, description);
     }
 
 }
