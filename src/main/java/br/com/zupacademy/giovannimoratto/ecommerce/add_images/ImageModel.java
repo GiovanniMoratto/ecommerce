@@ -1,4 +1,4 @@
-package br.com.zupacademy.giovannimoratto.ecommerce.add_image;
+package br.com.zupacademy.giovannimoratto.ecommerce.add_images;
 
 import br.com.zupacademy.giovannimoratto.ecommerce.add_product.ProductModel;
 import org.hibernate.validator.constraints.URL;

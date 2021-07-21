@@ -1,4 +1,4 @@
-package br.com.zupacademy.giovannimoratto.ecommerce.add_image;
+package br.com.zupacademy.giovannimoratto.ecommerce.add_images;
 
 import org.springframework.web.multipart.MultipartFile;
 

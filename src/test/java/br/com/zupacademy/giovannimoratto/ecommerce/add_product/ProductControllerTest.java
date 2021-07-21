@@ -37,7 +37,6 @@ import static java.math.BigDecimal.valueOf;
  * @Author giovanni.moratto
  */
 
-
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc

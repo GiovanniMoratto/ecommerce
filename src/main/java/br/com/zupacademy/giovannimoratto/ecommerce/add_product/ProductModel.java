@@ -1,7 +1,7 @@
 package br.com.zupacademy.giovannimoratto.ecommerce.add_product;
 
 import br.com.zupacademy.giovannimoratto.ecommerce.add_category.CategoryModel;
-import br.com.zupacademy.giovannimoratto.ecommerce.add_image.ImageModel;
+import br.com.zupacademy.giovannimoratto.ecommerce.add_images.ImageModel;
 import br.com.zupacademy.giovannimoratto.ecommerce.add_product.product_features.FeatureModel;
 import br.com.zupacademy.giovannimoratto.ecommerce.add_product.product_features.FeatureRequest;
 import br.com.zupacademy.giovannimoratto.ecommerce.add_user.UserModel;

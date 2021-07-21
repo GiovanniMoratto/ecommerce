@@ -1,4 +1,4 @@
-package br.com.zupacademy.giovannimoratto.ecommerce.add_image;
+package br.com.zupacademy.giovannimoratto.ecommerce.add_images;
 
 import br.com.zupacademy.giovannimoratto.ecommerce.add_product.ProductModel;
 import br.com.zupacademy.giovannimoratto.ecommerce.add_product.ProductRepository;
@@ -10,6 +10,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.Optional;
 import java.util.Set;
 
 /**
@@ -53,5 +54,13 @@ public interface ImageRepository extends JpaRepository <ImageModel, Long> {
     static ProductModel getProduct(Long id, ProductRepository productRepository) {
         return productRepository.findById(id).get();
     }
+
+    int countByLink(String link);
+
+    Optional <Object> findByLink(String link);
+
+    long countByLinkLike(String link);
+
+    String getByLink(String link1);
 
 }
