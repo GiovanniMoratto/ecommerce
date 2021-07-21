@@ -5,8 +5,10 @@ import br.com.zupacademy.giovannimoratto.ecommerce.add_product.ProductRepository
 import br.com.zupacademy.giovannimoratto.ecommerce.add_user.UserRepository;
 import br.com.zupacademy.giovannimoratto.ecommerce.validations.exception_handler.SearchException;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Set;
 
@@ -41,7 +43,7 @@ public interface ImageRepository extends JpaRepository <ImageModel, Long> {
     static void checkIfIsTheSame(Long userCreator, Long userLogged) throws SearchException {
         if (userCreator.equals(userLogged))
             return;
-        throw new SearchException("User not allowed!");
+        throw new ResponseStatusException(HttpStatus.FORBIDDEN, "User not allowed!");
     }
 
     static Set <String> uploadImages(ImageRequest request, FakeUploader fakeUploader) {

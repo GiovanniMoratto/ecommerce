@@ -12,14 +12,17 @@ import java.util.List;
 
 public class ImageRequest {
 
+    /* Attributes */
     @NotNull
     @Size(min = 1)
     private final List <MultipartFile> images;
 
+    /* Constructors */
     public ImageRequest(List <MultipartFile> images) {
         this.images = images;
     }
 
+    /* Getters and Setters */
     public List <MultipartFile> getImages() {
         return images;
     }

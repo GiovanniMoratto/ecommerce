@@ -1,8 +1,12 @@
 package br.com.zupacademy.giovannimoratto.ecommerce.add_image;
 
 import br.com.zupacademy.giovannimoratto.ecommerce.add_product.ProductModel;
+import org.hibernate.validator.constraints.URL;
 
 import javax.persistence.*;
+import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 /**
  * @Author giovanni.moratto
@@ -18,8 +22,12 @@ public class ImageModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
     private Long id;
+    @NotBlank
+    @URL
     @Column(name = "LINK", nullable = false)
     private String link;
+    @NotNull
+    @Valid
     @ManyToOne
     @JoinColumn(name = "ID_PRODUTO")
     private ProductModel product;
@@ -35,6 +43,7 @@ public class ImageModel {
         this.product = product;
     }
 
+    /* Getters and Setters */
     public String getLink() {
         return link;
     }
