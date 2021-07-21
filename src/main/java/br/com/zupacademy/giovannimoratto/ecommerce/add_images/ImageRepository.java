@@ -2,6 +2,7 @@ package br.com.zupacademy.giovannimoratto.ecommerce.add_images;
 
 import br.com.zupacademy.giovannimoratto.ecommerce.add_product.ProductModel;
 import br.com.zupacademy.giovannimoratto.ecommerce.add_product.ProductRepository;
+import br.com.zupacademy.giovannimoratto.ecommerce.add_user.UserModel;
 import br.com.zupacademy.giovannimoratto.ecommerce.add_user.UserRepository;
 import br.com.zupacademy.giovannimoratto.ecommerce.validations.exception_handler.SearchException;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -10,7 +11,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.Optional;
 import java.util.Set;
 
 /**
@@ -34,17 +34,21 @@ public interface ImageRepository extends JpaRepository <ImageModel, Long> {
     }
 
     static Long getUserId(UserRepository userRepository, UserDetails logged) {
-        return userRepository.getByLogin(logged.getUsername()).getId();
+        UserModel user = userRepository.findByLogin(logged.getUsername()).orElseThrow(() ->
+                new SearchException("User not allowed!"));
+        return user.getId();
     }
 
     static Long getProductCreatorId(Long id, ProductRepository productRepository) {
-        return productRepository.findById(id).get().getUserCreator().getId();
+        ProductModel product = productRepository.findById(id).orElseThrow(() ->
+                new SearchException("This ID Product does not exist"));
+        return product.getUserCreator().getId();
     }
 
     static void checkIfIsTheSame(Long userCreator, Long userLogged) throws SearchException {
-        if (userCreator.equals(userLogged))
-            return;
-        throw new ResponseStatusException(HttpStatus.FORBIDDEN, "User not allowed!");
+        if (!userCreator.equals(userLogged)) {
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "User not allowed!");
+        }
     }
 
     static Set <String> uploadImages(ImageRequest request, FakeUploader fakeUploader) {
@@ -54,13 +58,5 @@ public interface ImageRepository extends JpaRepository <ImageModel, Long> {
     static ProductModel getProduct(Long id, ProductRepository productRepository) {
         return productRepository.findById(id).get();
     }
-
-    int countByLink(String link);
-
-    Optional <Object> findByLink(String link);
-
-    long countByLinkLike(String link);
-
-    String getByLink(String link1);
 
 }

@@ -4,6 +4,7 @@ import br.com.zupacademy.giovannimoratto.ecommerce.add_category.CategoryModel;
 import br.com.zupacademy.giovannimoratto.ecommerce.add_images.ImageModel;
 import br.com.zupacademy.giovannimoratto.ecommerce.add_product.product_features.FeatureModel;
 import br.com.zupacademy.giovannimoratto.ecommerce.add_product.product_features.FeatureRequest;
+import br.com.zupacademy.giovannimoratto.ecommerce.add_review.ReviewModel;
 import br.com.zupacademy.giovannimoratto.ecommerce.add_user.UserModel;
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -51,6 +52,8 @@ public class ProductModel {
     private Set <FeatureModel> features = new HashSet <>();
     @OneToMany(mappedBy = "product", cascade = CascadeType.MERGE)
     private Set <ImageModel> images = new HashSet <>();
+    @OneToMany(mappedBy = "product")
+    private Set <ReviewModel> reviews = new HashSet <>();
 
     /* Constructors */
     // Default - JPA
