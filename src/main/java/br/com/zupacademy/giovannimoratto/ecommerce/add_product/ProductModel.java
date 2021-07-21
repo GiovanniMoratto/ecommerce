@@ -1,8 +1,9 @@
 package br.com.zupacademy.giovannimoratto.ecommerce.add_product;
 
 import br.com.zupacademy.giovannimoratto.ecommerce.add_category.CategoryModel;
-import br.com.zupacademy.giovannimoratto.ecommerce.add_product.product_features.FeatureRequest;
+import br.com.zupacademy.giovannimoratto.ecommerce.add_image.ImageModel;
 import br.com.zupacademy.giovannimoratto.ecommerce.add_product.product_features.FeatureModel;
+import br.com.zupacademy.giovannimoratto.ecommerce.add_product.product_features.FeatureRequest;
 import br.com.zupacademy.giovannimoratto.ecommerce.add_user.UserModel;
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -48,6 +49,8 @@ public class ProductModel {
     private LocalDateTime createdAt;
     @OneToMany(mappedBy = "product", cascade = CascadeType.PERSIST)
     private Set <FeatureModel> features = new HashSet <>();
+    @OneToMany(mappedBy = "product", cascade = CascadeType.MERGE)
+    private Set <ImageModel> images = new HashSet <>();
 
     /* Constructors */
     // Default - JPA
@@ -68,6 +71,17 @@ public class ProductModel {
         this.features.addAll(features.stream()
                 .map(feature -> feature.toModel(this))
                 .collect(Collectors.toSet()));
+    }
+
+    /* ImageRepository */
+    public UserModel getUserCreator() {
+        return userCreator;
+    }
+
+    public void addImages(Set <String> imageLinks) {
+        Set <ImageModel> images =
+                imageLinks.stream().map(link -> new ImageModel(link, this)).collect(Collectors.toSet());
+        this.images.addAll(images);
     }
 
 }

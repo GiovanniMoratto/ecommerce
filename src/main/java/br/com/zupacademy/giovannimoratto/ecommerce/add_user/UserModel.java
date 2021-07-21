@@ -55,4 +55,8 @@ public class UserModel {
         return login;
     }
 
+    // ImageRepository
+    public Long getId() {
+        return id;
+    }
 }
