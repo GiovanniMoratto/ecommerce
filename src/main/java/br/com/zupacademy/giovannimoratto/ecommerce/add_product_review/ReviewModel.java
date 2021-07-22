@@ -1,4 +1,4 @@
-package br.com.zupacademy.giovannimoratto.ecommerce.add_review;
+package br.com.zupacademy.giovannimoratto.ecommerce.add_product_review;
 
 import br.com.zupacademy.giovannimoratto.ecommerce.add_product.ProductModel;
 import br.com.zupacademy.giovannimoratto.ecommerce.add_user.UserModel;
@@ -19,11 +19,11 @@ public class ReviewModel {
     @Column(name = "ID")
     private Long id;
     @Column(name = "NOTA", nullable = false)
-    private Integer rating;
+    private Integer likes;
     @Column(name = "TITULO", nullable = false)
     private String title;
     @Column(name = "DESCRICAO", nullable = false)
-    private String description;
+    private String comment;
     @ManyToOne
     @JoinColumn(name = "ID_PRODUCT")
     private ProductModel product;
@@ -38,16 +38,25 @@ public class ReviewModel {
     }
 
     // Set ReviewRequest.class values in ReviewModel.class
-    public ReviewModel(Integer rating, String title, String description, ProductModel product, UserModel user) {
-        this.rating = rating;
+    public ReviewModel(Integer likes, String title, String comment, ProductModel product, UserModel user) {
+        this.likes = likes;
         this.title = title;
-        this.description = description;
+        this.comment = comment;
         this.product = product;
         this.user = user;
     }
 
-    public Integer getRating() {
-        return rating;
+    /* Getters and Setters */
+    public Integer getLikes() {
+        return likes;
+    }
+
+    public ProductModel getProduct() {
+        return product;
+    }
+
+    public UserModel getUser() {
+        return user;
     }
 
 }

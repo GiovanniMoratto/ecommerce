@@ -1,4 +1,4 @@
-package br.com.zupacademy.giovannimoratto.ecommerce.add_images;
+package br.com.zupacademy.giovannimoratto.ecommerce.add_product_images;
 
 import br.com.zupacademy.giovannimoratto.ecommerce.add_category.CategoryRepository;
 import br.com.zupacademy.giovannimoratto.ecommerce.add_category.CategoryRequest;
@@ -29,6 +29,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static java.math.BigDecimal.valueOf;
 
@@ -41,7 +42,6 @@ import static java.math.BigDecimal.valueOf;
 @AutoConfigureMockMvc
 class ImageControllerTest {
 
-    //private final String urlTemplate = "/api/new-product";
     private final MockMvc mockMvc;
     private final Gson gson;
     private final TokenService tokenService;
@@ -187,8 +187,9 @@ class ImageControllerTest {
         String fileName = "casper.jpg";
 
         // Generate Image files
-        MockMultipartFile file = new MockMultipartFile(imageRequestAttribute, getClass()
-                .getResourceAsStream(fileName));
+        MockMultipartFile file = new MockMultipartFile(
+                imageRequestAttribute, fileName, "multipart/form-data",
+                getClass().getResourceAsStream(fileName));
 
         mockMvc.perform(MockMvcRequestBuilders.multipart(urlTemplate)
                 .file(file))
@@ -207,8 +208,9 @@ class ImageControllerTest {
         String fileName = "casper.jpg";
 
         // Generate Image files
-        MockMultipartFile file = new MockMultipartFile(imageRequestAttribute, getClass()
-                .getResourceAsStream(fileName));
+        MockMultipartFile file = new MockMultipartFile(
+                imageRequestAttribute, fileName, "multipart/form-data",
+                getClass().getResourceAsStream(fileName));
 
         mockMvc.perform(MockMvcRequestBuilders.multipart(urlTemplate)
                 .file(file)
@@ -228,8 +230,9 @@ class ImageControllerTest {
         String fileName = "casper.jpg";
 
         // Generate Image files
-        MockMultipartFile file = new MockMultipartFile(imageRequestAttribute, getClass()
-                .getResourceAsStream(fileName));
+        MockMultipartFile file = new MockMultipartFile(
+                imageRequestAttribute, fileName, "multipart/form-data",
+                getClass().getResourceAsStream(fileName));
 
         mockMvc.perform(MockMvcRequestBuilders.multipart(urlTemplate)
                 .file(file)
@@ -246,17 +249,31 @@ class ImageControllerTest {
         long id = 1L;
         String urlTemplate = "/api/product/" + id + "/add-images";
         String imageRequestAttribute = "images";
-        String fileName = "casper.jpg";
+        String url = "http://bucket.io/";
+        String fileName1 = "casper.jpg";
+        String fileName2 = "cat.jpg";
+        String link1 = url + fileName1;
+        String link2 = url + fileName2;
 
         // Generate Image files
-        MockMultipartFile file = new MockMultipartFile(imageRequestAttribute, getClass()
-                .getResourceAsStream(fileName));
+        MockMultipartFile file1 = new MockMultipartFile(
+                imageRequestAttribute, fileName1, "multipart/form-data",
+                getClass().getResourceAsStream(fileName1));
+
+        MockMultipartFile file2 = new MockMultipartFile(
+                imageRequestAttribute, fileName2, "multipart/form-data",
+                getClass().getResourceAsStream(fileName2));
 
         mockMvc.perform(MockMvcRequestBuilders.multipart(urlTemplate)
-                .file(file)
+                .file(file1)
+                .file(file2)
                 .header("Authorization", "Bearer " + token1))
                 .andExpect(MockMvcResultMatchers.status().isOk());
-        Assertions.assertEquals(1L, imageRepository.count());
+        Assertions.assertEquals(2L, imageRepository.count());
+        Optional <ImageModel> optionalLink1 = imageRepository.findByLink(link1);
+        Assertions.assertTrue(optionalLink1.isPresent());
+        Optional <ImageModel> optionalLink2 = imageRepository.findByLink(link2);
+        Assertions.assertTrue(optionalLink2.isPresent());
     }
 
 }

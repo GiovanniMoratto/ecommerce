@@ -40,7 +40,7 @@ public class ProductRequest {
     @NotNull
     @Size(min = 3)
     @Valid
-    private List <FeatureRequest> features = new ArrayList <>();
+    private final List <FeatureRequest> features = new ArrayList <>();
 
     /* Constructors */
     public ProductRequest(String name, BigDecimal price, Integer availableQuantity, String description,
@@ -61,6 +61,11 @@ public class ProductRequest {
         UserModel user = userRepository.findByLogin(userLogged.getUsername()).orElseThrow(() ->
                 new SearchException("User not allowed!"));
         return new ProductModel(name, price, availableQuantity, description, category, user, features);
+    }
+
+    /* Getters and Setters */
+    public String getName() {
+        return name;
     }
 
 }

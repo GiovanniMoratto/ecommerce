@@ -1,4 +1,4 @@
-package br.com.zupacademy.giovannimoratto.ecommerce.add_images;
+package br.com.zupacademy.giovannimoratto.ecommerce.add_product_images;
 
 import br.com.zupacademy.giovannimoratto.ecommerce.add_product.ProductModel;
 import org.hibernate.validator.constraints.URL;
@@ -28,8 +28,8 @@ public class ImageModel {
     private String link;
     @NotNull
     @Valid
-    @ManyToOne
-    @JoinColumn(name = "ID_PRODUTO")
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "ID_PRODUTO", nullable = false)
     private ProductModel product;
 
     /* Constructors */
@@ -41,11 +41,6 @@ public class ImageModel {
     public ImageModel(String link, ProductModel product) {
         this.link = link;
         this.product = product;
-    }
-
-    /* Getters and Setters */
-    public String getLink() {
-        return link;
     }
 
 }

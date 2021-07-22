@@ -1,4 +1,4 @@
-package br.com.zupacademy.giovannimoratto.ecommerce.add_review;
+package br.com.zupacademy.giovannimoratto.ecommerce.add_product_review;
 
 import java.util.OptionalDouble;
 import java.util.Set;
@@ -19,9 +19,9 @@ public class Reviews {
         this.reviews = reviews;
     }
 
-    public double averageRating() {
-        Set <Integer> ratings = mapReviews(review -> review.getRating());
-        OptionalDouble average = ratings.stream().mapToInt(rating -> rating).average();
+    public double averageLikes() {
+        Set <Integer> likes = mapReviews(ReviewModel::getLikes);
+        OptionalDouble average = likes.stream().mapToInt(like -> like).average();
         return average.orElse(0.0);
     }
 
@@ -29,7 +29,7 @@ public class Reviews {
         return this.reviews.stream().map(mapFunction).collect(Collectors.toSet());
     }
 
-    public int numberOfRatings() {
+    public int numberOfLikes() {
         return reviews.size();
     }
 
