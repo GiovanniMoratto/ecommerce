@@ -4,6 +4,7 @@ import br.com.zupacademy.giovannimoratto.ecommerce.add_category.CategoryModel;
 import br.com.zupacademy.giovannimoratto.ecommerce.add_product.product_features.FeatureModel;
 import br.com.zupacademy.giovannimoratto.ecommerce.add_product.product_features.FeatureRequest;
 import br.com.zupacademy.giovannimoratto.ecommerce.add_product_images.ImageModel;
+import br.com.zupacademy.giovannimoratto.ecommerce.add_product_question.QuestionModel;
 import br.com.zupacademy.giovannimoratto.ecommerce.add_product_review.ReviewModel;
 import br.com.zupacademy.giovannimoratto.ecommerce.add_user.UserModel;
 import org.hibernate.annotations.CreationTimestamp;
@@ -12,9 +13,8 @@ import javax.persistence.*;
 import javax.validation.Valid;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 /**
@@ -54,6 +54,9 @@ public class ProductModel {
     private Set <ImageModel> images = new HashSet <>();
     @OneToMany(mappedBy = "product", cascade = CascadeType.MERGE)
     private Set <ReviewModel> reviews = new HashSet <>();
+    @OneToMany(mappedBy = "product", cascade = CascadeType.MERGE)
+    @OrderBy("titulo asc")
+    private SortedSet <QuestionModel> questions = new TreeSet <>();
 
     /* Constructors */
     // Default - JPA
@@ -81,6 +84,18 @@ public class ProductModel {
         Set <ImageModel> images =
                 imageLinks.stream().map(link -> new ImageModel(link, this)).collect(Collectors.toSet());
         this.images.addAll(images);
+    }
+
+    public <T> Set <T> mapFeatures(Function <FeatureModel, T> mapFunction) {
+        return this.features.stream().map(mapFunction).collect(Collectors.toSet());
+    }
+
+    public <T> Set <T> mapImages(Function <ImageModel, T> mapFunction) {
+        return this.images.stream().map(mapFunction).collect(Collectors.toSet());
+    }
+
+    public <T extends Comparable <T>> SortedSet <T> mapQuestions(Function <QuestionModel, T> mapFunction) {
+        return this.questions.stream().map(mapFunction).collect(Collectors.toCollection(TreeSet::new));
     }
 
     /* Getters and Setters */

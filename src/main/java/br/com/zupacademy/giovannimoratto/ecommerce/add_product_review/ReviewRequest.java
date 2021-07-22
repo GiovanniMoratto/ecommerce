@@ -35,6 +35,4 @@ public class ReviewRequest {
         return new ReviewModel(likes, title, comment, product, user);
     }
 
-    /* Getters and Setters */
-
 }
