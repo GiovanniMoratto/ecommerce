@@ -68,4 +68,5 @@ public class QuestionModel implements Comparable <QuestionModel> {
     public LocalDateTime getCreatedAt() {
         return createdAt;
     }
+    
 }

@@ -17,7 +17,7 @@ public class Email {
     public void sendEmail(QuestionModel question) {
         String body = "<html>...</html>";
         String subject = question.getTitle();
-        String nameFrom = "User name";
+        String nameFrom = "Costumer name";
         String from = question.getUser().getUsername();
         String to = question.getProduct().getUserCreator().getUsername();
 
