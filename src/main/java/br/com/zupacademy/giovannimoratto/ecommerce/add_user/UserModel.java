@@ -59,4 +59,5 @@ public class UserModel {
     public Long getId() {
         return id;
     }
+
 }

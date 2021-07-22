@@ -13,17 +13,17 @@ public class QuestionRequest {
 
     /* Attributes */
     @NotBlank
-    private final String title;
-
-    /* Constructors */
-    public QuestionRequest(String title) {
-        this.title = title;
-    }
+    private String title;
 
     /* Methods */
     // Convert ReviewRequest.class in ReviewModel.class
     public QuestionModel toModel(ProductModel product, UserModel user) {
         return new QuestionModel(title, product, user);
+    }
+
+    /* Getters and Setters */
+    public void setTitle(String title) {
+        this.title = title;
     }
 
 }

@@ -1,12 +1,10 @@
-package br.com.zupacademy.giovannimoratto.ecommerce.add_review;
+package br.com.zupacademy.giovannimoratto.ecommerce.add_product_review;
 
 import br.com.zupacademy.giovannimoratto.ecommerce.add_category.CategoryRequest;
 import br.com.zupacademy.giovannimoratto.ecommerce.add_product.ProductModel;
 import br.com.zupacademy.giovannimoratto.ecommerce.add_product.ProductRepository;
 import br.com.zupacademy.giovannimoratto.ecommerce.add_product.ProductRequest;
 import br.com.zupacademy.giovannimoratto.ecommerce.add_product.product_features.FeatureRequest;
-import br.com.zupacademy.giovannimoratto.ecommerce.add_product_review.ReviewRepository;
-import br.com.zupacademy.giovannimoratto.ecommerce.add_product_review.ReviewRequest;
 import br.com.zupacademy.giovannimoratto.ecommerce.add_user.UserModel;
 import br.com.zupacademy.giovannimoratto.ecommerce.add_user.UserRepository;
 import br.com.zupacademy.giovannimoratto.ecommerce.add_user.UserRequest;

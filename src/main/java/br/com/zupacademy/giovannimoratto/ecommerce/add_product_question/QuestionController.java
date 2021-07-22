@@ -2,8 +2,10 @@ package br.com.zupacademy.giovannimoratto.ecommerce.add_product_question;
 
 import br.com.zupacademy.giovannimoratto.ecommerce.add_product.ProductModel;
 import br.com.zupacademy.giovannimoratto.ecommerce.add_product.ProductRepository;
+import br.com.zupacademy.giovannimoratto.ecommerce.add_product_question.email.Email;
 import br.com.zupacademy.giovannimoratto.ecommerce.add_user.UserModel;
 import br.com.zupacademy.giovannimoratto.ecommerce.add_user.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -18,7 +20,6 @@ import javax.validation.Valid;
  * @Author giovanni.moratto
  */
 
-
 @RestController
 @RequestMapping("/api/product")
 public class QuestionController {
@@ -28,6 +29,7 @@ public class QuestionController {
     private final QuestionRepository questionRepository;
     private final Email email;
 
+    @Autowired
     public QuestionController(ProductRepository productRepository, UserRepository userRepository,
                               QuestionRepository questionRepository, Email email) {
         this.productRepository = productRepository;
@@ -51,7 +53,7 @@ public class QuestionController {
 
         QuestionModel newQuestion = request.toModel(product, user);
         questionRepository.save(newQuestion);
-        email.newQuestion(newQuestion);
+        email.sendEmail(newQuestion);
         return ResponseEntity.ok().build();
     }
 

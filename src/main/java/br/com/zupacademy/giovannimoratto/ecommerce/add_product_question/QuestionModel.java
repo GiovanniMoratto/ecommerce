@@ -61,4 +61,11 @@ public class QuestionModel implements Comparable <QuestionModel> {
         return product;
     }
 
+    public String getTitle() {
+        return title;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
 }
