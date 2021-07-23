@@ -100,6 +100,14 @@ public class ProductModel {
         return this.questions.stream().map(mapFunction).collect(Collectors.toCollection(TreeSet::new));
     }
 
+    public Boolean destock(Integer quantity){
+        if(quantity <= this.stockInformation){
+            stockInformation -= quantity;
+            return true;
+        }
+        return false;
+    }
+
     /* Getters */
     public Long getId() {
         return id;

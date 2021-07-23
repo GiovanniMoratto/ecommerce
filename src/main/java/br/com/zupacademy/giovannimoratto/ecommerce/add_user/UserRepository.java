@@ -23,4 +23,6 @@ public interface UserRepository extends JpaRepository <UserModel, Long> {
 
     int countByLogin(String login);
 
+    UserModel getByLogin(String username);
+
 }

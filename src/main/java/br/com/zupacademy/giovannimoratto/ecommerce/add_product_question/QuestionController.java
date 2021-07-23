@@ -53,7 +53,7 @@ public class QuestionController {
 
         QuestionModel newQuestion = request.toModel(product, user);
         questionRepository.save(newQuestion);
-        email.sendEmail(newQuestion);
+        email.sendQuestionEmail(newQuestion);
         return ResponseEntity.ok().build();
     }
 
