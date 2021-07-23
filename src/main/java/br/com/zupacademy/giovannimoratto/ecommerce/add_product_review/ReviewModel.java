@@ -25,7 +25,7 @@ public class ReviewModel {
     @Column(name = "DESCRICAO", nullable = false)
     private String comment;
     @ManyToOne
-    @JoinColumn(name = "ID_PRODUCT")
+    @JoinColumn(name = "ID_PRODUTO")
     private ProductModel product;
     @ManyToOne
     @JoinColumn(name = "ID_USUARIO")

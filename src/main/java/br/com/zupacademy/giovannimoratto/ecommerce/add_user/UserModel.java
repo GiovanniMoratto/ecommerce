@@ -35,9 +35,9 @@ public class UserModel {
     }
 
     // Set UserRequest.class values in UserModel.class
-    public UserModel(String requestLogin, String requestPassword) {
-        this.login = requestLogin;
-        this.password = UserRepository.userPasswordEncoder(requestPassword);
+    public UserModel(String login, String password) {
+        this.login = login;
+        this.password = UserRepository.userPasswordEncoder(password);
     }
 
     /* Getters */

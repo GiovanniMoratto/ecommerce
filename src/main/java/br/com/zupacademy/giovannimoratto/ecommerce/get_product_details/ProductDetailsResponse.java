@@ -14,7 +14,6 @@ import java.util.SortedSet;
  * @Author giovanni.moratto
  */
 
-@SuppressWarnings("unused")
 public class ProductDetailsResponse {
 
     /* Attributes */

@@ -28,7 +28,7 @@ public class QuestionModel implements Comparable <QuestionModel> {
     @Column(name = "DATA_CRIACAO", nullable = false)
     private LocalDateTime createdAt;
     @ManyToOne
-    @JoinColumn(name = "ID_PRODUCT")
+    @JoinColumn(name = "ID_PRODUTO")
     private ProductModel product;
     @ManyToOne
     @JoinColumn(name = "ID_USUARIO")

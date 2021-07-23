@@ -19,7 +19,7 @@ public class FeatureModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
     private Long id;
-    @Column(name = "NAME", nullable = false)
+    @Column(name = "NOME", nullable = false)
     private String name;
     @Column(name = "DESCRICAO", nullable = false)
     private String description;
