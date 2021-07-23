@@ -13,16 +13,14 @@ import java.util.Optional;
 @Repository
 public interface UserRepository extends JpaRepository <UserModel, Long> {
 
+    /* Methods */
     // Encode the password from UserModel.class
     static String userPasswordEncoder(String requestPassword) {
         return BCrypt.hashpw(requestPassword, BCrypt.gensalt());
     }
 
-    /* Methods */
     Optional <UserModel> findByLogin(String login);
 
     int countByLogin(String login);
-
-    UserModel getByLogin(String username);
 
 }

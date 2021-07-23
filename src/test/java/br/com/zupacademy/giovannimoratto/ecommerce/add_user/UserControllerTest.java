@@ -76,7 +76,7 @@ class UserControllerTest {
     // POST Request
     @ParameterizedTest
     @NullAndEmptySource
-    @ValueSource(strings = {"invalidemail.com", "@invalid.com", "@.com", "@invalid"})
+    @ValueSource(strings = {"invalidEmail.com", "@invalid.com", "@.com", "@invalid"})
     @DisplayName("400 Bad Request - When trying to POST with invalid LOGIN")
     void loginInvalidStatus400(String login) throws Exception {
         // Values to Fail Test

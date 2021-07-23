@@ -8,8 +8,8 @@ import br.com.zupacademy.giovannimoratto.ecommerce.add_product.product_features.
 import br.com.zupacademy.giovannimoratto.ecommerce.add_user.UserModel;
 import br.com.zupacademy.giovannimoratto.ecommerce.add_user.UserRepository;
 import br.com.zupacademy.giovannimoratto.ecommerce.add_user.UserRequest;
-import br.com.zupacademy.giovannimoratto.ecommerce.security.Authentication.login.LoginRequest;
-import br.com.zupacademy.giovannimoratto.ecommerce.security.Authentication.token.TokenService;
+import br.com.zupacademy.giovannimoratto.ecommerce.security.authentication.login.LoginRequest;
+import br.com.zupacademy.giovannimoratto.ecommerce.security.authentication.token.TokenService;
 import com.google.gson.Gson;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -23,7 +23,6 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
@@ -52,7 +51,6 @@ class QuestionControllerTest {
     private final QuestionRepository questionRepository;
     private final ProductRepository productRepository;
     private final UserRepository userRepository;
-    private String salespersonToken;
     private String customerToken;
 
     @Autowired
@@ -96,7 +94,7 @@ class QuestionControllerTest {
         /* Log Users */
         // Salesperson
         LoginRequest loginSalesperson = new LoginRequest(salespersonLogin, salespersonPassword);
-        salespersonToken = tokenService.buildToken(authManager.authenticate(loginSalesperson.convert()));
+        String salespersonToken = tokenService.buildToken(authManager.authenticate(loginSalesperson.convert()));
         // Customer
         LoginRequest loginCustomer = new LoginRequest(customerLogin, customerPassword);
         customerToken = tokenService.buildToken(authManager.authenticate(loginCustomer.convert()));
@@ -160,7 +158,7 @@ class QuestionControllerTest {
     void titleInvalidStatus400(String title) throws Exception {
         // Values to Fail Test
         long idProduct = 1L;
-        QuestionRequest request = new QuestionRequest ();
+        QuestionRequest request = new QuestionRequest();
         request.setTitle(title);
 
         String jsonRequest = gson.toJson(request);
@@ -191,7 +189,7 @@ class QuestionControllerTest {
         // Values to Success Test
         long idProduct = 1L;
         String title = "Best video game ever!";
-        QuestionRequest request = new QuestionRequest ();
+        QuestionRequest request = new QuestionRequest();
         request.setTitle(title);
 
         String jsonRequest = gson.toJson(request);

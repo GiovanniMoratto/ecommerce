@@ -1,8 +1,8 @@
 package br.com.zupacademy.giovannimoratto.ecommerce.security;
 
-import br.com.zupacademy.giovannimoratto.ecommerce.security.Authentication.AuthService;
-import br.com.zupacademy.giovannimoratto.ecommerce.security.Authentication.token.TokenAuth;
-import br.com.zupacademy.giovannimoratto.ecommerce.security.Authentication.token.TokenService;
+import br.com.zupacademy.giovannimoratto.ecommerce.security.authentication.AuthService;
+import br.com.zupacademy.giovannimoratto.ecommerce.security.authentication.token.TokenAuth;
+import br.com.zupacademy.giovannimoratto.ecommerce.security.authentication.token.TokenService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -47,12 +47,9 @@ public class SecurityConfigurations extends WebSecurityConfigurerAdapter {
 
     // Settings of static resources (JS - CSS - Images - Videos - etc)
     @Override
-    public void configure(WebSecurity web) throws Exception {
-        web.ignoring()
-                .antMatchers("/**.html", "/v2/api-docs", "/webjars/**",
-                        "/configuration/**", "/swagger-resources/**"
-                            );
-    }
+    public void configure(WebSecurity web) {
+        web.ignoring().antMatchers(
+                "/**.html", "/v2/api-docs", "/webjars/**", "/configuration/**", "/swagger-resources/**");}
 
     // Authorization Settings - Resource Accesses and Access Profiles
     @Override
@@ -61,13 +58,13 @@ public class SecurityConfigurations extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.POST, "/api/new-user").permitAll()
                 .antMatchers(HttpMethod.POST, "/api/new-category").permitAll()
                 .antMatchers(HttpMethod.POST, "/api/auth").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/product/*").permitAll()
                 .anyRequest().authenticated()
                 .and().csrf().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and().addFilterBefore(
                 new TokenAuth(tokenService, authService),
-                UsernamePasswordAuthenticationFilter.class
-                                      );
+                UsernamePasswordAuthenticationFilter.class);
     }
 
 }

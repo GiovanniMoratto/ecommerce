@@ -15,6 +15,4 @@ public interface ProductRepository extends JpaRepository <ProductModel, Long> {
     /* Methods */
     Optional <ProductModel> findByName(String name);
 
-    int countByName(String name);
-
 }

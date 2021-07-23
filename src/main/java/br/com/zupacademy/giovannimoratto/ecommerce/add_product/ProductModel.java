@@ -45,8 +45,8 @@ public class ProductModel {
     private CategoryModel category;
     @Valid
     @ManyToOne
-    @JoinColumn(name = "USUARIO_CRIADOR", nullable = false)
-    private UserModel userCreator;
+    @JoinColumn(name = "VENDEDOR", nullable = false)
+    private UserModel seller;
     @CreationTimestamp
     private LocalDateTime createdAt;
     @OneToMany(mappedBy = "product", cascade = CascadeType.PERSIST)
@@ -67,14 +67,14 @@ public class ProductModel {
 
     // Set ProductRequest.class values in ProductModel.class
     public ProductModel(String name, BigDecimal price, Integer stockInformation, String description,
-                        CategoryModel category, UserModel userCreator,
+                        CategoryModel category, UserModel seller,
                         Collection <FeatureRequest> features) {
         this.name = name;
         this.price = price;
         this.stockInformation = stockInformation;
         this.description = description;
         this.category = category;
-        this.userCreator = userCreator;
+        this.seller = seller;
         this.features.addAll(features.stream()
                 .map(feature -> feature.toModel(this))
                 .collect(Collectors.toSet()));
@@ -99,7 +99,11 @@ public class ProductModel {
         return this.questions.stream().map(mapFunction).collect(Collectors.toCollection(TreeSet::new));
     }
 
-    /* Getters and Setters */
+    /* Getters */
+    public Long getId() {
+        return id;
+    }
+
     public String getName() {
         return name;
     }
@@ -120,8 +124,8 @@ public class ProductModel {
         return category;
     }
 
-    public UserModel getUserCreator() {
-        return userCreator;
+    public UserModel getSeller() {
+        return seller;
     }
 
     public LocalDateTime getCreatedAt() {

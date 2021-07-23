@@ -8,8 +8,8 @@ import br.com.zupacademy.giovannimoratto.ecommerce.add_product.product_features.
 import br.com.zupacademy.giovannimoratto.ecommerce.add_user.UserModel;
 import br.com.zupacademy.giovannimoratto.ecommerce.add_user.UserRepository;
 import br.com.zupacademy.giovannimoratto.ecommerce.add_user.UserRequest;
-import br.com.zupacademy.giovannimoratto.ecommerce.security.Authentication.login.LoginRequest;
-import br.com.zupacademy.giovannimoratto.ecommerce.security.Authentication.token.TokenService;
+import br.com.zupacademy.giovannimoratto.ecommerce.security.authentication.login.LoginRequest;
+import br.com.zupacademy.giovannimoratto.ecommerce.security.authentication.token.TokenService;
 import com.google.gson.Gson;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;

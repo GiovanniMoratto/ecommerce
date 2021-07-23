@@ -1,4 +1,4 @@
-package br.com.zupacademy.giovannimoratto.ecommerce.security.Authentication.login;
+package br.com.zupacademy.giovannimoratto.ecommerce.security.authentication.login;
 
 import br.com.zupacademy.giovannimoratto.ecommerce.add_user.UserModel;
 import org.springframework.security.core.GrantedAuthority;
@@ -15,13 +15,13 @@ import java.util.List;
 public class Logged implements UserDetails {
 
     /* Attributes */
-    private UserModel user;
-    private User userDetails;
+    private final UserModel user;
+    private final User userDetails;
 
     /* Constructors */
     public Logged(UserModel userModel) {
         this.user = userModel;
-        this.userDetails = new User(userModel.getUsername(), userModel.getPassword(), List.of());
+        this.userDetails = new User(userModel.getLogin(), userModel.getPassword(), List.of());
     }
 
     /* Methods */
@@ -58,6 +58,11 @@ public class Logged implements UserDetails {
     @Override
     public boolean isEnabled() {
         return userDetails.isEnabled();
+    }
+
+    /* Getters */
+    public UserModel getUser() {
+        return user;
     }
 
 }

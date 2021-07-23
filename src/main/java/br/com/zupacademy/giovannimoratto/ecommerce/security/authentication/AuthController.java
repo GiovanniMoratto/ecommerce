@@ -1,8 +1,8 @@
-package br.com.zupacademy.giovannimoratto.ecommerce.security.Authentication;
+package br.com.zupacademy.giovannimoratto.ecommerce.security.authentication;
 
-import br.com.zupacademy.giovannimoratto.ecommerce.security.Authentication.login.LoginRequest;
-import br.com.zupacademy.giovannimoratto.ecommerce.security.Authentication.token.TokenResponse;
-import br.com.zupacademy.giovannimoratto.ecommerce.security.Authentication.token.TokenService;
+import br.com.zupacademy.giovannimoratto.ecommerce.security.authentication.login.LoginRequest;
+import br.com.zupacademy.giovannimoratto.ecommerce.security.authentication.token.TokenResponse;
+import br.com.zupacademy.giovannimoratto.ecommerce.security.authentication.token.TokenService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

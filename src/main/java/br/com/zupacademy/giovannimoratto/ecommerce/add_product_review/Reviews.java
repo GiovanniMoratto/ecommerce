@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 public class Reviews {
 
     /* Attributes */
-    private Set <ReviewModel> reviews;
+    private final Set <ReviewModel> reviews;
 
     /* Setter */
     public Reviews(Set <ReviewModel> reviews) {

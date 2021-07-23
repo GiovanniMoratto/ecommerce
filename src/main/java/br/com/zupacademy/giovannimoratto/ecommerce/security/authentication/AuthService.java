@@ -1,6 +1,6 @@
-package br.com.zupacademy.giovannimoratto.ecommerce.security.Authentication;
+package br.com.zupacademy.giovannimoratto.ecommerce.security.authentication;
 
-import br.com.zupacademy.giovannimoratto.ecommerce.security.Authentication.login.ObjectMapper;
+import br.com.zupacademy.giovannimoratto.ecommerce.security.authentication.login.ObjectMapper;
 import io.jsonwebtoken.lang.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;

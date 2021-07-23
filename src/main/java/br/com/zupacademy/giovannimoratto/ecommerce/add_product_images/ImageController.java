@@ -49,7 +49,7 @@ public class ImageController {
         UserModel user = userRepository.findByLogin(logged.getUsername()).orElseThrow(() ->
                 new ResponseStatusException(HttpStatus.FORBIDDEN, "User not allowed!"));
 
-        if (!product.getUserCreator().getId().equals(user.getId())) {
+        if (!product.getSeller().getId().equals(user.getId())) {
             throw new ResponseStatusException(HttpStatus.FORBIDDEN, "User not allowed!");
         }
 

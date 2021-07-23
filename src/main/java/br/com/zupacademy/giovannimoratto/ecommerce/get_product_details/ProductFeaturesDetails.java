@@ -6,6 +6,7 @@ import br.com.zupacademy.giovannimoratto.ecommerce.add_product.product_features.
  * @Author giovanni.moratto
  */
 
+@SuppressWarnings("unused")
 public class ProductFeaturesDetails {
 
     private final String name;
@@ -16,7 +17,7 @@ public class ProductFeaturesDetails {
         this.description = feature.getDescription();
     }
 
-    /* Getters and Setters */
+    /* Getters */
     public String getName() {
         return name;
     }

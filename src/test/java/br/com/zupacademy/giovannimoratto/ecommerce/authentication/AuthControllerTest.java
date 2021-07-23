@@ -2,7 +2,7 @@ package br.com.zupacademy.giovannimoratto.ecommerce.authentication;
 
 import br.com.zupacademy.giovannimoratto.ecommerce.add_user.UserRepository;
 import br.com.zupacademy.giovannimoratto.ecommerce.add_user.UserRequest;
-import br.com.zupacademy.giovannimoratto.ecommerce.security.Authentication.login.LoginRequest;
+import br.com.zupacademy.giovannimoratto.ecommerce.security.authentication.login.LoginRequest;
 import com.google.gson.Gson;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -87,7 +87,7 @@ class AuthControllerTest {
     // POST Request
     @ParameterizedTest
     @NullAndEmptySource
-    @ValueSource(strings = {"invalidemail.com", "@invalid.com", "@.com", "@invalid"})
+    @ValueSource(strings = {"invalidEmail.com", "@invalid.com", "@.com", "@invalid"})
     @DisplayName("400 Bad Request - When trying to POST with invalid type of USERNAME")
     void usernameInvalidStatus400(String username) throws Exception {
         // Values to Fail Test

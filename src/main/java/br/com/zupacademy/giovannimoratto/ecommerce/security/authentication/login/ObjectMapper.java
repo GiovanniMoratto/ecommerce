@@ -1,4 +1,4 @@
-package br.com.zupacademy.giovannimoratto.ecommerce.security.Authentication.login;
+package br.com.zupacademy.giovannimoratto.ecommerce.security.authentication.login;
 
 import org.springframework.security.core.userdetails.UserDetails;
 

@@ -27,7 +27,7 @@ public class ReviewController {
     private final ReviewRepository reviewRepository;
 
     public ReviewController(ProductRepository productRepository, UserRepository userRepository,
-                            ReviewRepository repository, ReviewRepository reviewRepository) {
+                            ReviewRepository reviewRepository) {
         this.productRepository = productRepository;
         this.userRepository = userRepository;
         this.reviewRepository = reviewRepository;

@@ -8,6 +8,7 @@ import java.lang.annotation.*;
  * @Author giovanni.moratto
  */
 
+@SuppressWarnings("unused")
 @Documented
 @Constraint(validatedBy = {ExistsIdValidator.class})
 @Target({

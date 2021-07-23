@@ -1,6 +1,6 @@
-package br.com.zupacademy.giovannimoratto.ecommerce.security.Authentication.token;
+package br.com.zupacademy.giovannimoratto.ecommerce.security.authentication.token;
 
-import br.com.zupacademy.giovannimoratto.ecommerce.security.Authentication.AuthService;
+import br.com.zupacademy.giovannimoratto.ecommerce.security.authentication.AuthService;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -45,7 +45,7 @@ public class TokenAuth extends OncePerRequestFilter {
         if (token == null || token.isEmpty() || !token.startsWith("Bearer ")) {
             return null;
         }
-        return token.substring(7, token.length());
+        return token.substring(7);
     }
 
     // Authenticate token by getting username and checking the database.

@@ -40,6 +40,17 @@ public class UserModel {
         this.password = UserRepository.userPasswordEncoder(requestPassword);
     }
 
+    /* Getters */
+    // ImageRepository
+    public Long getId() {
+        return id;
+    }
+
+    // Get username to Logged.class
+    public String getLogin() {
+        return login;
+    }
+
     // Check for Hash in UserControllerTest
     public String getPassword() {
         return password;
@@ -48,16 +59,6 @@ public class UserModel {
     // Check for date Before or equal to Present in UserControllerTest
     public LocalDateTime getCreatedAt() {
         return createdAt;
-    }
-
-    // Get username to Logged.class
-    public String getUsername() {
-        return login;
-    }
-
-    // ImageRepository
-    public Long getId() {
-        return id;
     }
 
 }

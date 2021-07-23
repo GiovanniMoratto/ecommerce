@@ -38,7 +38,7 @@ public class CategoryModel {
         this.name = name;
     }
 
-    /* Getters and Setters */
+    /* Getters */
     // Check if the category exists in CategoryControllerTest
     public Long getId() {
         return id;

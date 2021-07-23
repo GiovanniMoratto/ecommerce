@@ -14,6 +14,7 @@ import java.util.SortedSet;
  * @Author giovanni.moratto
  */
 
+@SuppressWarnings("unused")
 public class ProductDetailsResponse {
 
     /* Attributes */
@@ -41,17 +42,16 @@ public class ProductDetailsResponse {
         Reviews reviews = product.getReviews();
         this.averageLikes = reviews.averageLikes();
         this.numberOfLikes = reviews.numberOfLikes();
-        this.reviews = reviews.mapReviews(review -> {
-            return Map.of("title", review.getTitle(), "comment", review.getComment());
-        });
+        this.reviews = reviews.mapReviews(review ->
+                Map.of("title", review.getTitle(), "comment", review.getComment()));
         this.questions = product.mapQuestions(QuestionModel::getTitle);
         this.stockInformation = product.getStockInformation();
         this.numberOfReviews = reviews.numberOfReviews();
         this.category = product.getCategory().getName();
-        this.seller = product.getUserCreator().getUsername();
+        this.seller = product.getSeller().getLogin();
     }
 
-    /* Getters and Setters */
+    /* Getters */
     public Set <String> getImages() {
         return images;
     }
