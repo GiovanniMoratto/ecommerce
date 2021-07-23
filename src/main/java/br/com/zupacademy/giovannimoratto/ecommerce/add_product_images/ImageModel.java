@@ -43,4 +43,9 @@ public class ImageModel {
         this.product = product;
     }
 
+    /* Getters and Setters */
+    public String getLink() {
+        return link;
+    }
+
 }

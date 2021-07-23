@@ -59,4 +59,12 @@ public class ReviewModel {
         return user;
     }
 
+    public String getTitle() {
+        return title;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
 }

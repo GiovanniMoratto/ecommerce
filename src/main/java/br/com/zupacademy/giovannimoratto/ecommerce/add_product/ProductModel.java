@@ -6,6 +6,7 @@ import br.com.zupacademy.giovannimoratto.ecommerce.add_product.product_features.
 import br.com.zupacademy.giovannimoratto.ecommerce.add_product_images.ImageModel;
 import br.com.zupacademy.giovannimoratto.ecommerce.add_product_question.QuestionModel;
 import br.com.zupacademy.giovannimoratto.ecommerce.add_product_review.ReviewModel;
+import br.com.zupacademy.giovannimoratto.ecommerce.add_product_review.Reviews;
 import br.com.zupacademy.giovannimoratto.ecommerce.add_user.UserModel;
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -35,7 +36,7 @@ public class ProductModel {
     @Column(name = "PRECO", nullable = false)
     private BigDecimal price;
     @Column(name = "QTA_DISPONIVEL", nullable = false)
-    private Integer availableQuantity;
+    private Integer stockInformation;
     @Column(name = "DESCRICAO", nullable = false)
     private String description;
     @Valid
@@ -65,12 +66,12 @@ public class ProductModel {
     }
 
     // Set ProductRequest.class values in ProductModel.class
-    public ProductModel(String name, BigDecimal price, Integer availableQuantity, String description,
+    public ProductModel(String name, BigDecimal price, Integer stockInformation, String description,
                         CategoryModel category, UserModel userCreator,
                         Collection <FeatureRequest> features) {
         this.name = name;
         this.price = price;
-        this.availableQuantity = availableQuantity;
+        this.stockInformation = stockInformation;
         this.description = description;
         this.category = category;
         this.userCreator = userCreator;
@@ -99,8 +100,48 @@ public class ProductModel {
     }
 
     /* Getters and Setters */
+    public String getName() {
+        return name;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public Integer getStockInformation() {
+        return stockInformation;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public CategoryModel getCategory() {
+        return category;
+    }
+
     public UserModel getUserCreator() {
         return userCreator;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public Set <FeatureModel> getFeatures() {
+        return features;
+    }
+
+    public Set <ImageModel> getImages() {
+        return images;
+    }
+
+    public Reviews getReviews() {
+        return new Reviews(this.reviews);
+    }
+
+    public SortedSet <QuestionModel> getQuestions() {
+        return questions;
     }
 
 }

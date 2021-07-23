@@ -56,4 +56,12 @@ public class FeatureModel {
         return Objects.hash(name, description);
     }
 
+    /* Getters and Setters */
+    public String getName() {
+        return name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
 }

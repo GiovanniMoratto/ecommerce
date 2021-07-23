@@ -30,7 +30,7 @@ public class ProductRequest {
     private final BigDecimal price;
     @NotNull
     @Min(0)
-    private final Integer availableQuantity;
+    private final Integer stockInformation;
     @NotBlank
     @Size(max = 1000)
     private final String description;
@@ -43,11 +43,11 @@ public class ProductRequest {
     private final List <FeatureRequest> features = new ArrayList <>();
 
     /* Constructors */
-    public ProductRequest(String name, BigDecimal price, Integer availableQuantity, String description,
+    public ProductRequest(String name, BigDecimal price, Integer stockInformation, String description,
                           Long idCategory, List <FeatureRequest> features) {
         this.name = name;
         this.price = price;
-        this.availableQuantity = availableQuantity;
+        this.stockInformation = stockInformation;
         this.description = description;
         this.idCategory = idCategory;
         this.features.addAll(features);
@@ -60,7 +60,7 @@ public class ProductRequest {
                 new SearchException("Category does not exists."));
         UserModel user = userRepository.findByLogin(userLogged.getUsername()).orElseThrow(() ->
                 new SearchException("User not allowed!"));
-        return new ProductModel(name, price, availableQuantity, description, category, user, features);
+        return new ProductModel(name, price, stockInformation, description, category, user, features);
     }
 
     /* Getters and Setters */

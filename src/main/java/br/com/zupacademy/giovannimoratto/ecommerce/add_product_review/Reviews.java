@@ -15,7 +15,7 @@ public class Reviews {
     private Set <ReviewModel> reviews;
 
     /* Setter */
-    public void setReviews(Set <ReviewModel> reviews) {
+    public Reviews(Set <ReviewModel> reviews) {
         this.reviews = reviews;
     }
 
@@ -29,8 +29,13 @@ public class Reviews {
         return this.reviews.stream().map(mapFunction).collect(Collectors.toSet());
     }
 
+    public int numberOfReviews() {
+        return this.reviews.size();
+    }
+
     public int numberOfLikes() {
-        return reviews.size();
+        Set <Integer> likes = mapReviews(ReviewModel::getLikes);
+        return likes.size();
     }
 
 }
