@@ -2,7 +2,7 @@ package br.com.zupacademy.giovannimoratto.ecommerce.add_product_question;
 
 import br.com.zupacademy.giovannimoratto.ecommerce.add_product.ProductModel;
 import br.com.zupacademy.giovannimoratto.ecommerce.add_product.ProductRepository;
-import br.com.zupacademy.giovannimoratto.ecommerce.add_product_question.email.Email;
+import br.com.zupacademy.giovannimoratto.ecommerce.email.Email;
 import br.com.zupacademy.giovannimoratto.ecommerce.add_user.UserModel;
 import br.com.zupacademy.giovannimoratto.ecommerce.add_user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;

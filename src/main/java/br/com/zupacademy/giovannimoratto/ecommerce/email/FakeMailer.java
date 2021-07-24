@@ -1,4 +1,4 @@
-package br.com.zupacademy.giovannimoratto.ecommerce.add_product_question.email;
+package br.com.zupacademy.giovannimoratto.ecommerce.email;
 
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;

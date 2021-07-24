@@ -1,4 +1,4 @@
-package br.com.zupacademy.giovannimoratto.ecommerce.purchase_request;
+package br.com.zupacademy.giovannimoratto.ecommerce.purchase_costumer;
 
 import br.com.zupacademy.giovannimoratto.ecommerce.add_product.ProductModel;
 import br.com.zupacademy.giovannimoratto.ecommerce.validations.annotations.ExistsId;

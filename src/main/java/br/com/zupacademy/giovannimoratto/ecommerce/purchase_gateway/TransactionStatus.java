@@ -1,4 +1,4 @@
-package br.com.zupacademy.giovannimoratto.ecommerce.purchase_response;
+package br.com.zupacademy.giovannimoratto.ecommerce.purchase_gateway;
 
 /**
  * @Author giovanni.moratto

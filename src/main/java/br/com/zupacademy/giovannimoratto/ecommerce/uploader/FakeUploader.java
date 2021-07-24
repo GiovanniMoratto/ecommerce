@@ -1,4 +1,4 @@
-package br.com.zupacademy.giovannimoratto.ecommerce.add_product_images;
+package br.com.zupacademy.giovannimoratto.ecommerce.uploader;
 
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;

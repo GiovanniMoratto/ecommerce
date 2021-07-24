@@ -1,8 +1,8 @@
-package br.com.zupacademy.giovannimoratto.ecommerce.purchase_request;
+package br.com.zupacademy.giovannimoratto.ecommerce.purchase_costumer;
 
 import br.com.zupacademy.giovannimoratto.ecommerce.add_product.ProductModel;
 import br.com.zupacademy.giovannimoratto.ecommerce.add_product.ProductRepository;
-import br.com.zupacademy.giovannimoratto.ecommerce.add_product_question.email.Email;
+import br.com.zupacademy.giovannimoratto.ecommerce.email.Email;
 import br.com.zupacademy.giovannimoratto.ecommerce.add_user.UserModel;
 import br.com.zupacademy.giovannimoratto.ecommerce.add_user.UserRepository;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -23,15 +23,15 @@ import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/api")
-public class PurchaseRequestController {
+public class PurchaseCostumerController {
 
     private final UserRepository userRepository;
     private final ProductRepository productRepository;
     private final PurchaseRepository purchaseRepository;
     private final Email email;
 
-    public PurchaseRequestController(UserRepository userRepository, ProductRepository productRepository,
-                                     PurchaseRepository purchaseRepository, Email email) {
+    public PurchaseCostumerController(UserRepository userRepository, ProductRepository productRepository,
+                                      PurchaseRepository purchaseRepository, Email email) {
         this.userRepository = userRepository;
         this.productRepository = productRepository;
         this.purchaseRepository = purchaseRepository;
@@ -57,10 +57,10 @@ public class PurchaseRequestController {
 
         if (subtracted) {
             Gateway gateway = request.getGateway();
-            PurchaseModel buy = new PurchaseModel(quantity, product, gateway, costumer);
-            purchaseRepository.save(buy);
-            email.sendBuyEmail(buy);
-            return buy.urlRedirect(uriBuilder);
+            PurchaseModel purchase = new PurchaseModel(quantity, product, gateway, costumer);
+            purchaseRepository.save(purchase);
+            email.sendPurchaseRequestEmail(purchase);
+            return purchase.urlRedirect(uriBuilder);
         }
         BindException stockErrors = new BindException(request, "Buy Request");
         stockErrors.reject(

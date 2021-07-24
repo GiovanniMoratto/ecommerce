@@ -1,4 +1,4 @@
-package br.com.zupacademy.giovannimoratto.ecommerce.purchase_request;
+package br.com.zupacademy.giovannimoratto.ecommerce.purchase_costumer;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

@@ -1,8 +1,6 @@
-package br.com.zupacademy.giovannimoratto.ecommerce.purchase;
+package br.com.zupacademy.giovannimoratto.ecommerce.purchase_gateway;
 
-import br.com.zupacademy.giovannimoratto.ecommerce.purchase_request.Gateway;
-import br.com.zupacademy.giovannimoratto.ecommerce.purchase_request.PurchaseModel;
-import br.com.zupacademy.giovannimoratto.ecommerce.purchase_response.TransactionStatus;
+import br.com.zupacademy.giovannimoratto.ecommerce.purchase_costumer.PurchaseModel;
 import br.com.zupacademy.giovannimoratto.ecommerce.validations.annotations.ExistsId;
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -17,7 +15,7 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "tb_transacao")
-public class BankTransactionModel {
+public class TransactionModel {
 
     /* Attributes */
     @Id
@@ -25,26 +23,30 @@ public class BankTransactionModel {
     @Column(name = "ID")
     private Long id;
     @NotNull
+    @Enumerated(EnumType.STRING)
+    @Column(name = "STATUS_TRANSACAO", nullable = false)
     private TransactionStatus status;
     @NotNull
-    @Enumerated
-    private Gateway gateway;
+    @Column(name = "GATEWAY_PAGAMENTO", nullable = false)
+    private String gateway;
     @NotNull
     @CreationTimestamp
+    @Column(name = "DATA_CRIACAO", nullable = false)
     private LocalDateTime createdAt;
     @ManyToOne
     @NotNull
     @ExistsId(domainClass = PurchaseModel.class)
+    @JoinColumn(name = "ID_COMPRA", nullable = false)
     private PurchaseModel purchase;
 
     /* Constructors */
     // Default - JPA
-    public BankTransactionModel() {
+    public TransactionModel() {
     }
 
-    public BankTransactionModel(TransactionStatus status, String idTransacaoGateway, PurchaseModel purchase) {
+    public TransactionModel(TransactionStatus status, @NotBlank String gateway, PurchaseModel purchase) {
         this.status = status;
-        this.idTransacaoGateway = idTransacaoGateway;
+        this.gateway = gateway;
         this.purchase = purchase;
     }
 

@@ -1,9 +1,9 @@
-package br.com.zupacademy.giovannimoratto.ecommerce.purchase_request;
+package br.com.zupacademy.giovannimoratto.ecommerce.purchase_costumer;
 
 import br.com.zupacademy.giovannimoratto.ecommerce.add_product.ProductModel;
 import br.com.zupacademy.giovannimoratto.ecommerce.add_user.UserModel;
-import br.com.zupacademy.giovannimoratto.ecommerce.purchase.BankTransactionModel;
-import br.com.zupacademy.giovannimoratto.ecommerce.purchase_response.GatewayResponse;
+import br.com.zupacademy.giovannimoratto.ecommerce.purchase_gateway.TransactionModel;
+import br.com.zupacademy.giovannimoratto.ecommerce.purchase_gateway.GatewayResponse;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.persistence.*;
@@ -39,7 +39,7 @@ public class PurchaseModel {
     @JoinColumn(name = "ID_USUARIO", nullable = false)
     private UserModel costumer;
     @OneToMany(mappedBy = "purchase", cascade = CascadeType.MERGE)
-    private final Set <BankTransactionModel> transactions = new HashSet <>();
+    private final Set <TransactionModel> transactions = new HashSet <>();
 
     /* Constructors */
     // Default - JPA
@@ -81,12 +81,12 @@ public class PurchaseModel {
     }
 
     public void addTransaction(GatewayResponse gateway) {
-        BankTransactionModel newTransaction = gateway.create(this);
+        TransactionModel newTransaction = gateway.create(this);
         this.transactions.add(newTransaction);
     }
 
-    private Set <BankTransactionModel> successfullyTransactions(){
-        return this.transactions.stream().filter(BankTransactionModel::complete).collect(Collectors.toSet());
+    private Set <TransactionModel> successfullyTransactions(){
+        return this.transactions.stream().filter(TransactionModel::complete).collect(Collectors.toSet());
     }
 
     public boolean successfullyProcessed(){

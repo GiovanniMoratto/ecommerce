@@ -1,4 +1,4 @@
-package br.com.zupacademy.giovannimoratto.ecommerce.add_product_question.email;
+package br.com.zupacademy.giovannimoratto.ecommerce.email;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
