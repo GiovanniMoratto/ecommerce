@@ -1,4 +1,4 @@
-package br.com.zupacademy.giovannimoratto.ecommerce.add_buy;
+package br.com.zupacademy.giovannimoratto.ecommerce.purchase_request;
 
 import br.com.zupacademy.giovannimoratto.ecommerce.add_product.ProductModel;
 import br.com.zupacademy.giovannimoratto.ecommerce.validations.annotations.ExistsId;
@@ -10,7 +10,7 @@ import javax.validation.constraints.Positive;
  * @Author giovanni.moratto
  */
 
-public class BuyRequest {
+public class PurchaseRequest {
 
     /* Attributes */
     @Positive
@@ -23,7 +23,7 @@ public class BuyRequest {
     private final Gateway gateway;
 
     /* Constructor */
-    public BuyRequest(Integer quantity, Long idProduct, Gateway gateway) {
+    public PurchaseRequest(Integer quantity, Long idProduct, Gateway gateway) {
         this.quantity = quantity;
         this.idProduct = idProduct;
         this.gateway = gateway;

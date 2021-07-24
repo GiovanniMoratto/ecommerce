@@ -1,6 +1,6 @@
 package br.com.zupacademy.giovannimoratto.ecommerce.add_product_question.email;
 
-import br.com.zupacademy.giovannimoratto.ecommerce.add_buy.BuyModel;
+import br.com.zupacademy.giovannimoratto.ecommerce.purchase_request.PurchaseModel;
 import br.com.zupacademy.giovannimoratto.ecommerce.add_product_question.QuestionModel;
 import org.springframework.stereotype.Service;
 
@@ -27,7 +27,7 @@ public class Email {
         mailer.send(body, subject, nameFrom, from, to);
     }
 
-    public void sendBuyEmail(BuyModel buy) {
+    public void sendBuyEmail(PurchaseModel buy) {
         String body = "<html>...</html>";
         String subject = "Purchase of " + buy.getProduct().getName() + " was successful. ";
         String nameFrom = "compras@nossomercadolivre.com";

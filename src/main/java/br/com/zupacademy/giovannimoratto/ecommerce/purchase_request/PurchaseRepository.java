@@ -1,4 +1,4 @@
-package br.com.zupacademy.giovannimoratto.ecommerce.add_buy;
+package br.com.zupacademy.giovannimoratto.ecommerce.purchase_request;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
  */
 
 @Repository
-public interface BuyRepository extends JpaRepository <BuyModel, Long> {
+public interface PurchaseRepository extends JpaRepository <PurchaseModel, Long> {
 
 }

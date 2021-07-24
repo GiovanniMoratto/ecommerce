@@ -1,4 +1,4 @@
-package br.com.zupacademy.giovannimoratto.ecommerce.add_buy;
+package br.com.zupacademy.giovannimoratto.ecommerce.purchase_request;
 
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -11,7 +11,7 @@ public enum Gateway {
 
     pagseguro {
         @Override
-        String urlResponse(BuyModel buy, UriComponentsBuilder uriBuilder) {
+        String urlResponse(PurchaseModel buy, UriComponentsBuilder uriBuilder) {
             UriComponents pagseguroResponse = uriBuilder.path("/pagseguro/{id}/")
                     .buildAndExpand(buy.getId().toString());
             return "pagseguro.com" + buy.getId() + "?redirectUrl=" + pagseguroResponse;
@@ -20,12 +20,12 @@ public enum Gateway {
 
     paypal {
         @Override
-        String urlResponse(BuyModel buy, UriComponentsBuilder uriBuilder) {
+        String urlResponse(PurchaseModel buy, UriComponentsBuilder uriBuilder) {
             UriComponents paypalResponse = uriBuilder.path("/paypal/{id}/")
                     .buildAndExpand(buy.getId().toString());
             return "paypal.com" + buy.getId() + "?redirectUrl=" + paypalResponse;
         }
     };
 
-    abstract String urlResponse(BuyModel buy, UriComponentsBuilder uriBuilder);
+    abstract String urlResponse(PurchaseModel buy, UriComponentsBuilder uriBuilder);
 }

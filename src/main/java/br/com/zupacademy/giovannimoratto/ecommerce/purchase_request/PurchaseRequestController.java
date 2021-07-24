@@ -1,4 +1,4 @@
-package br.com.zupacademy.giovannimoratto.ecommerce.add_buy;
+package br.com.zupacademy.giovannimoratto.ecommerce.purchase_request;
 
 import br.com.zupacademy.giovannimoratto.ecommerce.add_product.ProductModel;
 import br.com.zupacademy.giovannimoratto.ecommerce.add_product.ProductRepository;
@@ -23,18 +23,18 @@ import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/api")
-public class BuyController {
+public class PurchaseRequestController {
 
     private final UserRepository userRepository;
     private final ProductRepository productRepository;
-    private final BuyRepository buyRepository;
+    private final PurchaseRepository purchaseRepository;
     private final Email email;
 
-    public BuyController(UserRepository userRepository, ProductRepository productRepository,
-                         BuyRepository buyRepository, Email email) {
+    public PurchaseRequestController(UserRepository userRepository, ProductRepository productRepository,
+                                     PurchaseRepository purchaseRepository, Email email) {
         this.userRepository = userRepository;
         this.productRepository = productRepository;
-        this.buyRepository = buyRepository;
+        this.purchaseRepository = purchaseRepository;
         this.email = email;
     }
 
@@ -43,7 +43,7 @@ public class BuyController {
     @PostMapping("/buy") // Endpoint
     @Transactional
     public String addBuy(@AuthenticationPrincipal UserDetails logged,
-                         @RequestBody @Valid BuyRequest request,
+                         @RequestBody @Valid PurchaseRequest request,
                          UriComponentsBuilder uriBuilder) throws BindException {
         // Get user from Token
         UserModel costumer = userRepository.getByLogin(logged.getUsername());
@@ -57,8 +57,8 @@ public class BuyController {
 
         if (subtracted) {
             Gateway gateway = request.getGateway();
-            BuyModel buy = new BuyModel(quantity, product, gateway, costumer);
-            buyRepository.save(buy);
+            PurchaseModel buy = new PurchaseModel(quantity, product, gateway, costumer);
+            purchaseRepository.save(buy);
             email.sendBuyEmail(buy);
             return buy.urlRedirect(uriBuilder);
         }
