@@ -18,7 +18,7 @@ public class Invoice {
         RestTemplate restTemplate = new RestTemplate();
         Map <String, Object> request = Map.of("idPurchase", purchase.getId(), "product",
                 purchase.getProduct().getDescription());
-        restTemplate.postForEntity("http://localhost:8080/get-invoice", request, String.class);
+        restTemplate.postForEntity("http://localhost:8080/api/get-invoice", request, String.class);
     }
 
 }

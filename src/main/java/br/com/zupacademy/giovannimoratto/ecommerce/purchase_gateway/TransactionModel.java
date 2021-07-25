@@ -22,20 +22,15 @@ public class TransactionModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
     private Long id;
-    @NotNull
-    @Enumerated(EnumType.STRING)
+    //@Enumerated(EnumType.STRING)
     @Column(name = "STATUS_TRANSACAO", nullable = false)
     private TransactionStatus status;
-    @NotNull
     @Column(name = "GATEWAY_PAGAMENTO", nullable = false)
     private String gateway;
-    @NotNull
     @CreationTimestamp
     @Column(name = "DATA_CRIACAO", nullable = false)
     private LocalDateTime createdAt;
     @ManyToOne
-    @NotNull
-    @ExistsId(domainClass = PurchaseModel.class)
     @JoinColumn(name = "ID_COMPRA", nullable = false)
     private PurchaseModel purchase;
 
@@ -44,7 +39,7 @@ public class TransactionModel {
     public TransactionModel() {
     }
 
-    public TransactionModel(TransactionStatus status, @NotBlank String gateway, PurchaseModel purchase) {
+    public TransactionModel(TransactionStatus status, String gateway, PurchaseModel purchase) {
         this.status = status;
         this.gateway = gateway;
         this.purchase = purchase;

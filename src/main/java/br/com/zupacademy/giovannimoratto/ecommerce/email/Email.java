@@ -40,7 +40,7 @@ public class Email {
     public void sendPurchaseCompleteEmail(PurchaseModel buy) {
         String body = "<html>...</html>";
         String subject = "Purchase of " + buy.getProduct().getName() + " was successful complete. Thank you for your " +
-                         "choice";
+                         "business";
         String nameFrom = "compras@nossomercadolivre.com";
         String to = buy.getCostumer().getLogin();
         String from = buy.getProduct().getSeller().getLogin();

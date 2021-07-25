@@ -20,27 +20,27 @@ import static br.com.zupacademy.giovannimoratto.ecommerce.purchase_gateway.Trans
 public class PaypalRequest implements GatewayResponse {
 
     /* Attributes */
-    @NotBlank
-    private final String idTransaction;
-    @NotNull
-    @Min(0)
-    @Max(1)
-    private final Integer paypalStatus;
+    //@NotBlank
+    private final String gateway;
+    //@NotNull
+    //@Min(0)
+   // @Max(1)
+    private final int status;
 
     /* Constructors */
-    public PaypalRequest(String idTransaction, Integer paypalStatus) {
-        this.idTransaction = idTransaction;
-        this.paypalStatus = paypalStatus;
+    public PaypalRequest(String gateway, int status) {
+        this.gateway = gateway;
+        this.status = status;
     }
 
     /* Methods */
     @Override
     public TransactionModel create(PurchaseModel purchase) {
-        return new TransactionModel(convert(paypalStatus), idTransaction, purchase);
+        return new TransactionModel(this.status == 0 ? failed : successful, gateway, purchase);
     }
 
-    public TransactionStatus convert(Integer paypalStatus) {
-        return this.paypalStatus == 0 ? failed : successful;
+    public TransactionStatus convert(int paypalStatus) {
+        return this.status == 0 ? failed : successful;
     }
 
 }

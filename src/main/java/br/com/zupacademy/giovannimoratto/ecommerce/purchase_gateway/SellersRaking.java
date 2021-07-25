@@ -17,6 +17,6 @@ public class SellersRaking {
         RestTemplate restTemplate = new RestTemplate();
         Map <String, Object> request = Map.of("idPurchase", purchase.getId(), "seller",
                 purchase.getProduct().getSeller().getLogin());
-        restTemplate.postForEntity("http://localhost:8080/get-ranking", request, String.class);
+        restTemplate.postForEntity("http://localhost:8080/api/get-ranking", request, String.class);
     }
 }

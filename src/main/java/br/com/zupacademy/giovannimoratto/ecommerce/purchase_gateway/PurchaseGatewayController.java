@@ -8,10 +8,7 @@ import br.com.zupacademy.giovannimoratto.ecommerce.purchase_gateway.paypal.Paypa
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.transaction.Transactional;
@@ -38,19 +35,12 @@ public class PurchaseGatewayController {
     @PostMapping("/pagseguro.com/{id}") // Endpoint
     @Transactional
     public void pagseguroResponseProcess(@AuthenticationPrincipal UserDetails logged, @PathVariable("id") Long id,
-                                           @Valid PagseguroRequest request) {
+                                         @RequestBody @Valid PagseguroRequest request, GatewayResponse gateway) {
+
         process(id, request);
     }
 
-    // POST Request - Purchase Response for PayPal
-    @PostMapping("/paypal.com/{id}") // Endpoint
-    @Transactional
-    public void paypalResponseProcess(@AuthenticationPrincipal UserDetails logged, @PathVariable("id") Long id,
-                                        @Valid PaypalRequest request) {
-        process(id, request);
-    }
-
-    private void process(Long id, GatewayResponse gateway) {
+    public void process(Long id, GatewayResponse gateway) {
 
         PurchaseModel purchase = repository.findById(id).orElseThrow(() ->
                 new ResponseStatusException(HttpStatus.NOT_FOUND));
@@ -58,6 +48,30 @@ public class PurchaseGatewayController {
         purchase.addTransaction(gateway);
         repository.save(purchase);
         event.process(purchase);
+    }
+
+    // POST Request - Purchase Response for PayPal
+    @PostMapping("/paypal.com/{id}") // Endpoint
+    @Transactional
+    public void paypalResponseProcess(@AuthenticationPrincipal UserDetails logged, @PathVariable("id") Long id,
+                                      @RequestBody @Valid PaypalRequest request, GatewayResponse gateway) {
+
+        process(id, request);
+    }
+
+    @PostMapping("/get-invoice")
+    public void getInvoice(@RequestBody InvoiceRequest invoiceRequest) {
+        System.out.println("Invoice");
+        System.out.println("Purchase : " + invoiceRequest.getIdPurchase());
+        System.out.println("Product: " + invoiceRequest.getProduct());
+    }
+
+    @PostMapping("/get-ranking")
+    public void getRanking(@RequestBody SellersRakingRequest ranking) {
+
+        System.out.println("Ranking");
+        System.out.println("Purchase : " + ranking.getId());
+        System.out.println("Seller: " + ranking.getSeller());
     }
 
 }

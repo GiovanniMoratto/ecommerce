@@ -6,6 +6,8 @@ import br.com.zupacademy.giovannimoratto.ecommerce.purchase_gateway.Invoice;
 import br.com.zupacademy.giovannimoratto.ecommerce.purchase_gateway.SellersRaking;
 import org.springframework.stereotype.Service;
 
+import java.awt.*;
+import java.awt.event.ActionListener;
 import java.util.Set;
 
 /**
@@ -42,4 +44,5 @@ public class PurchaseEventService {
             email.sendPurchaseFailEmail(purchase);
         }
     }
+
 }

@@ -32,11 +32,13 @@ public class PagseguroRequest implements GatewayResponse {
     /* Methods */
     @Override
     public TransactionModel create(PurchaseModel purchase) {
-        return new TransactionModel(convert(pagseguroStatus), idTransaction, purchase);
+        return new TransactionModel(pagseguroStatus.convert(), idTransaction, purchase);
     }
-
+    /*
     public TransactionStatus convert(PagseguroStatusResponse pagseguroStatus) {
         return this.pagseguroStatus.equals(SUCESSO) ? successful : failed;
     }
+
+     */
 
 }

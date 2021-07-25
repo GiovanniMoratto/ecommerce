@@ -9,5 +9,4 @@ import br.com.zupacademy.giovannimoratto.ecommerce.purchase_costumer.PurchaseMod
 public interface SuccessEvent {
 
     void process(PurchaseModel purchase);
-
 }

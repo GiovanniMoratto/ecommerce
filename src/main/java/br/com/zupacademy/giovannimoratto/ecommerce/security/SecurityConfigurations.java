@@ -59,7 +59,10 @@ public class SecurityConfigurations extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.POST, "/api/new-category").permitAll()
                 .antMatchers(HttpMethod.POST, "/api/auth").permitAll()
                 .antMatchers(HttpMethod.GET, "/api/product/*").permitAll()
+                .antMatchers(HttpMethod.POST, "/api/get-invoice").permitAll()
+                .antMatchers(HttpMethod.POST, "/api/get-ranking").permitAll()
                 .anyRequest().authenticated()
+                .and().cors()
                 .and().csrf().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and().addFilterBefore(
