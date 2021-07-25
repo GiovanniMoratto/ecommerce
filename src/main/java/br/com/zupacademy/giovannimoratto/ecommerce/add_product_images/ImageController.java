@@ -4,7 +4,8 @@ import br.com.zupacademy.giovannimoratto.ecommerce.add_product.ProductModel;
 import br.com.zupacademy.giovannimoratto.ecommerce.add_product.ProductRepository;
 import br.com.zupacademy.giovannimoratto.ecommerce.add_user.UserModel;
 import br.com.zupacademy.giovannimoratto.ecommerce.add_user.UserRepository;
-import br.com.zupacademy.giovannimoratto.ecommerce.uploader.FakeUploader;
+import br.com.zupacademy.giovannimoratto.ecommerce.uploader.Uploader;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -24,22 +25,20 @@ import java.util.Set;
  */
 
 @RestController
-@RequestMapping("/api/product")
+@RequestMapping("/api")
 public class ImageController {
 
-    private final ProductRepository productRepository;
-    private final UserRepository userRepository;
-    private final FakeUploader uploader;
-
-    public ImageController(ProductRepository productRepository, UserRepository userRepository, FakeUploader uploader) {
-        this.productRepository = productRepository;
-        this.userRepository = userRepository;
-        this.uploader = uploader;
-    }
+    /* Dependencies Injection */
+    @Autowired
+    private ProductRepository productRepository;
+    @Autowired
+    private UserRepository userRepository;
+    @Autowired
+    private Uploader uploader;
 
     /* Methods */
     // POST Request - Register a Image in a Product
-    @PostMapping("/{id}/add-images") // Endpoint
+    @PostMapping("/product/{id}/add-images") // Endpoint
     @Transactional
     public ResponseEntity <?> addNewImage(@PathVariable Long id, @Valid ImageRequest request,
                                           @AuthenticationPrincipal UserDetails logged) {
@@ -54,7 +53,7 @@ public class ImageController {
             throw new ResponseStatusException(HttpStatus.FORBIDDEN, "User not allowed!");
         }
 
-        Set <String> imageLinks = uploader.sendToCloudAndReturnLinks(request.getImages());
+        Set <String> imageLinks = uploader.upload(request.getImages());
         product.addImages(imageLinks);
         productRepository.save(product);
 

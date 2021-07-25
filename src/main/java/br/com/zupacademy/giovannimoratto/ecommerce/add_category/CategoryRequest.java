@@ -20,7 +20,7 @@ public class CategoryRequest {
     private final Long idParentCategory;
 
     /* Constructors */
-    public CategoryRequest(String name, Long idParentCategory) {
+    public CategoryRequest(@NotBlank String name, Long idParentCategory) {
         this.name = name;
         this.idParentCategory = idParentCategory;
     }

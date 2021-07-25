@@ -1,6 +1,8 @@
 package br.com.zupacademy.giovannimoratto.ecommerce.add_category;
 
 import javax.persistence.*;
+import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
 
 /**
  * @Author giovanni.moratto
@@ -13,12 +15,12 @@ public class CategoryModel {
     /* Attributes */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID")
+    @Column(name = "id")
     private Long id;
-    @Column(name = "NOME", nullable = false)
+    @Column(name = "nome", nullable = false, unique = true)
     private String name;
     @ManyToOne
-    @JoinColumn(name = "ID_PARENT_CATEGORY")
+    @JoinColumn(name = "id_categoria_mae")
     private CategoryModel parentCategory;
 
     /* Constructors */
@@ -28,13 +30,13 @@ public class CategoryModel {
     }
 
     // Case 1 - Set CategoryRequest.class values in CategoryModel.class
-    public CategoryModel(String requestName, CategoryModel requestParentCategory) {
-        this.name = requestName;
-        this.parentCategory = requestParentCategory;
+    public CategoryModel(@NotBlank String name, @Valid CategoryModel parentCategory) {
+        this.name = name;
+        this.parentCategory = parentCategory;
     }
 
     // Case 2 - Set CategoryRequest.class values in CategoryModel.class
-    public CategoryModel(String name) {
+    public CategoryModel(@NotBlank String name) {
         this.name = name;
     }
 

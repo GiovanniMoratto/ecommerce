@@ -3,7 +3,10 @@ package br.com.zupacademy.giovannimoratto.ecommerce.add_user;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.PastOrPresent;
+import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 
 /**
@@ -17,15 +20,15 @@ public class UserModel {
     /* Attributes */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID")
+    @Column(name = "id")
     private Long id;
-    @Column(name = "LOGIN", nullable = false)
+    @Column(name = "login", nullable = false, unique = true)
     private String login;
-    @Column(name = "SENHA", nullable = false)
+    @Column(name = "senha", nullable = false)
     private String password;
-    @CreationTimestamp
     @PastOrPresent
-    @Column(name = "DATA_CRIACAO", nullable = false)
+    @CreationTimestamp
+    @Column(name = "data_criacao", nullable = false)
     private LocalDateTime createdAt;
 
     /* Constructors */
@@ -35,7 +38,7 @@ public class UserModel {
     }
 
     // Set UserRequest.class values in UserModel.class
-    public UserModel(String login, String password) {
+    public UserModel(@NotBlank @Email String login, @NotBlank @Size(min = 6) String password) {
         this.login = login;
         this.password = UserRepository.userPasswordEncoder(password);
     }

@@ -1,6 +1,7 @@
 package br.com.zupacademy.giovannimoratto.ecommerce.add_product_images;
 
 import br.com.zupacademy.giovannimoratto.ecommerce.add_product.ProductModel;
+import br.com.zupacademy.giovannimoratto.ecommerce.validations.annotations.ExistsId;
 import org.hibernate.validator.constraints.URL;
 
 import javax.persistence.*;
@@ -12,7 +13,6 @@ import javax.validation.constraints.NotNull;
  * @Author giovanni.moratto
  */
 
-
 @Entity
 @Table(name = "tb_imagens")
 public class ImageModel {
@@ -20,16 +20,17 @@ public class ImageModel {
     /* Attributes */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID")
+    @Column(name = "id")
     private Long id;
-    @NotBlank
     @URL
-    @Column(name = "LINK", nullable = false)
+    @NotBlank
+    @Column(name = "link", nullable = false)
     private String link;
-    @NotNull
     @Valid
+    @NotNull
+    @ExistsId(domainClass = ProductModel.class)
     @ManyToOne(optional = false)
-    @JoinColumn(name = "ID_PRODUTO", nullable = false)
+    @JoinColumn(name = "id_produto", nullable = false)
     private ProductModel product;
 
     /* Constructors */
@@ -38,7 +39,7 @@ public class ImageModel {
     public ImageModel() {
     }
 
-    public ImageModel(String link, ProductModel product) {
+    public ImageModel(@NotBlank @URL String link, @NotNull @Valid ProductModel product) {
         this.link = link;
         this.product = product;
     }

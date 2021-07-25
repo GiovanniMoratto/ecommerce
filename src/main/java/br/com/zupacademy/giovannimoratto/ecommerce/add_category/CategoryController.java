@@ -1,5 +1,6 @@
 package br.com.zupacademy.giovannimoratto.ecommerce.add_category;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,11 +18,9 @@ import javax.validation.Valid;
 @RequestMapping("/api")
 public class CategoryController {
 
-    private final CategoryRepository repository;
-
-    public CategoryController(CategoryRepository repository) {
-        this.repository = repository;
-    }
+    /* Dependencies Injection */
+    @Autowired
+    private CategoryRepository repository;
 
     /* Methods */
     // POST Request - Register a new Category

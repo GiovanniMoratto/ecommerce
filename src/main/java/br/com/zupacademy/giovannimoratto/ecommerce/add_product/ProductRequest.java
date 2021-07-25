@@ -28,8 +28,8 @@ public class ProductRequest {
     @Positive
     @DecimalMin("0.01")
     private final BigDecimal price;
-    @NotNull
     @Min(0)
+    @NotNull
     private final Integer stockInformation;
     @NotBlank
     @Size(max = 1000)
@@ -37,14 +37,15 @@ public class ProductRequest {
     @NotNull
     @ExistsId(domainClass = CategoryModel.class)
     private final Long idCategory;
+    @Valid
     @NotNull
     @Size(min = 3)
-    @Valid
     private final List <FeatureRequest> features = new ArrayList <>();
 
     /* Constructors */
-    public ProductRequest(String name, BigDecimal price, Integer stockInformation, String description,
-                          Long idCategory, List <FeatureRequest> features) {
+    public ProductRequest(@NotBlank String name, @NotNull @Positive @DecimalMin("0.01") BigDecimal price,
+                          @NotNull @Min(0) Integer stockInformation, @NotBlank @Size(max = 1000) String description,
+                          @NotNull Long idCategory, @NotNull @Size(min = 3) @Valid List <FeatureRequest> features) {
         this.name = name;
         this.price = price;
         this.stockInformation = stockInformation;
@@ -56,10 +57,13 @@ public class ProductRequest {
     /* Methods */
     // Convert ProductRequest.class in ProductModel.class
     public ProductModel toModel(CategoryRepository repository, UserRepository userRepository, UserDetails userLogged) {
+
         CategoryModel category = repository.findById(idCategory).orElseThrow(() ->
                 new SearchException("Category does not exists."));
+
         UserModel user = userRepository.findByLogin(userLogged.getUsername()).orElseThrow(() ->
                 new SearchException("User not allowed!"));
+
         return new ProductModel(name, price, stockInformation, description, category, user, features);
     }
 

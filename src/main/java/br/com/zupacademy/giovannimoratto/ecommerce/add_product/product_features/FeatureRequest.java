@@ -17,7 +17,7 @@ public class FeatureRequest {
     private final String description;
 
     /* Constructors */
-    public FeatureRequest(String name, String description) {
+    public FeatureRequest(@NotBlank String name, @NotBlank String description) {
         this.name = name;
         this.description = description;
     }

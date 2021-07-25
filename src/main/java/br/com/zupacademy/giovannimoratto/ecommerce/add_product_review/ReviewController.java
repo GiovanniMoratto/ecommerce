@@ -4,6 +4,7 @@ import br.com.zupacademy.giovannimoratto.ecommerce.add_product.ProductModel;
 import br.com.zupacademy.giovannimoratto.ecommerce.add_product.ProductRepository;
 import br.com.zupacademy.giovannimoratto.ecommerce.add_user.UserModel;
 import br.com.zupacademy.giovannimoratto.ecommerce.add_user.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -19,23 +20,20 @@ import javax.validation.Valid;
  */
 
 @RestController
-@RequestMapping("/api/product")
+@RequestMapping("/api")
 public class ReviewController {
 
-    private final ProductRepository productRepository;
-    private final UserRepository userRepository;
-    private final ReviewRepository reviewRepository;
-
-    public ReviewController(ProductRepository productRepository, UserRepository userRepository,
-                            ReviewRepository reviewRepository) {
-        this.productRepository = productRepository;
-        this.userRepository = userRepository;
-        this.reviewRepository = reviewRepository;
-    }
+    /* Dependencies Injection */
+    @Autowired
+    private ProductRepository productRepository;
+    @Autowired
+    private UserRepository userRepository;
+    @Autowired
+    private ReviewRepository reviewRepository;
 
     /* Methods */
     // POST Request - Register a Review in a Product
-    @PostMapping("/{id}/add-review") // Endpoint
+    @PostMapping("/product/{id}/add-review") // Endpoint
     @Transactional
     public ResponseEntity <?> addNewReview(@PathVariable Long id, @AuthenticationPrincipal UserDetails logged,
                                            @RequestBody @Valid ReviewRequest request) {

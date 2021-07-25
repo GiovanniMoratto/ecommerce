@@ -1,8 +1,10 @@
 package br.com.zupacademy.giovannimoratto.ecommerce.add_product.product_features;
 
 import br.com.zupacademy.giovannimoratto.ecommerce.add_product.ProductModel;
+import br.com.zupacademy.giovannimoratto.ecommerce.validations.annotations.ExistsId;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
@@ -17,15 +19,16 @@ public class FeatureModel {
     /* Attributes */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID")
+    @Column(name = "id")
     private Long id;
-    @Column(name = "NOME", nullable = false)
+    @Column(name = "nome", nullable = false)
     private String name;
-    @Column(name = "DESCRICAO", nullable = false)
+    @Column(name = "descricao", nullable = false)
     private String description;
     @NotNull
+    @ExistsId(domainClass = ProductModel.class)
     @ManyToOne
-    @JoinColumn(name = "PRODUTO", nullable = false)
+    @JoinColumn(name = "produto", nullable = false)
     private ProductModel product;
 
     /* Constructors */
@@ -35,10 +38,15 @@ public class FeatureModel {
     }
 
     // Set FeatureRequest.class values in FeatureModel.class
-    public FeatureModel(String name, String description, ProductModel product) {
+    public FeatureModel(@NotBlank String name, @NotBlank String description, @NotNull ProductModel product) {
         this.name = name;
         this.description = description;
         this.product = product;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, description);
     }
 
     @Override
@@ -51,11 +59,6 @@ public class FeatureModel {
         return name.equals(that.name) && description.equals(that.description);
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(name, description);
-    }
-
     /* Getters and Setters */
     public String getName() {
         return name;
@@ -64,4 +67,5 @@ public class FeatureModel {
     public String getDescription() {
         return description;
     }
+
 }

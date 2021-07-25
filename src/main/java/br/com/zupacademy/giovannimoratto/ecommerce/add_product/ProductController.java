@@ -2,6 +2,7 @@ package br.com.zupacademy.giovannimoratto.ecommerce.add_product;
 
 import br.com.zupacademy.giovannimoratto.ecommerce.add_category.CategoryRepository;
 import br.com.zupacademy.giovannimoratto.ecommerce.add_user.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -21,16 +22,13 @@ import javax.validation.Valid;
 @RequestMapping("/api")
 public class ProductController {
 
-    private final ProductRepository repository;
-    private final CategoryRepository categoryRepository;
-    private final UserRepository userRepository;
-
-    public ProductController(ProductRepository repository, CategoryRepository categoryRepository,
-                             UserRepository userRepository) {
-        this.repository = repository;
-        this.categoryRepository = categoryRepository;
-        this.userRepository = userRepository;
-    }
+    /* Dependencies Injection */
+    @Autowired
+    private ProductRepository repository;
+    @Autowired
+    private CategoryRepository categoryRepository;
+    @Autowired
+    private UserRepository userRepository;
 
     /* Methods */
     // POST Request - Register a new Product

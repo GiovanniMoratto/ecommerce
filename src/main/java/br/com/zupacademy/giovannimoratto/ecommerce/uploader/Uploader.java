@@ -12,10 +12,11 @@ import java.util.stream.Collectors;
  */
 
 @Component
-public class FakeUploader {
+public class Uploader {
 
-    public Set <String> sendToCloudAndReturnLinks(List <MultipartFile> images) {
-        return images.stream().map(image -> "http://bucket.io/" + image.getOriginalFilename())
+    // Send to cloud and return the link
+    public Set <String> upload(List <MultipartFile> files) {
+        return files.stream().map(file -> "http://ecommerce/files.com/" + file.getOriginalFilename())
                 .collect(Collectors.toSet());
     }
 }
