@@ -4,7 +4,7 @@ import br.com.zupacademy.giovannimoratto.ecommerce.purchases.costumer.PurchaseMo
 import br.com.zupacademy.giovannimoratto.ecommerce.purchases.costumer.PurchaseRepository;
 import br.com.zupacademy.giovannimoratto.ecommerce.purchases.gateway.actions.InvoiceRequest;
 import br.com.zupacademy.giovannimoratto.ecommerce.purchases.gateway.actions.SellersRakingRequest;
-import br.com.zupacademy.giovannimoratto.ecommerce.purchases.gateway.event.PurchaseEventService;
+import br.com.zupacademy.giovannimoratto.ecommerce.purchases.gateway.event.EventService;
 import br.com.zupacademy.giovannimoratto.ecommerce.purchases.gateway.request.GatewayResponse;
 import br.com.zupacademy.giovannimoratto.ecommerce.purchases.gateway.request.pagseguro.PagseguroRequest;
 import br.com.zupacademy.giovannimoratto.ecommerce.purchases.gateway.request.paypal.PaypalRequest;
@@ -31,7 +31,7 @@ public class GatewayController {
     @Autowired
     private PurchaseRepository repository;
     @Autowired
-    private PurchaseEventService event;
+    private EventService event;
 
     /* Methods */
     // POST Request - Purchase Response for PagSeguro

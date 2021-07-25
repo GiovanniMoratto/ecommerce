@@ -9,11 +9,13 @@ import javax.validation.constraints.NotNull;
 
 public class SellersRakingRequest {
 
+    /* Attributes */
     @NotNull
     private Long id;
     @NotBlank
     private String seller;
 
+    /* Getters */
     public Long getId() {
         return id;
     }

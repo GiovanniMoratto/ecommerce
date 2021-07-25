@@ -2,7 +2,6 @@ package br.com.zupacademy.giovannimoratto.ecommerce.questions;
 
 import br.com.zupacademy.giovannimoratto.ecommerce.products.ProductModel;
 import br.com.zupacademy.giovannimoratto.ecommerce.users.UserModel;
-import br.com.zupacademy.giovannimoratto.ecommerce.validations.annotations.ExistsId;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -58,7 +57,7 @@ public class QuestionModel implements Comparable <QuestionModel> {
         return this.title.compareTo(o.title);
     }
 
-    /* Getters and Setters */
+    /* Getters */
     public UserModel getUser() {
         return user;
     }

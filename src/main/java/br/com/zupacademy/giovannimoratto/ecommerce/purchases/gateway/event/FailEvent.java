@@ -8,5 +8,5 @@ import br.com.zupacademy.giovannimoratto.ecommerce.purchases.costumer.PurchaseMo
 
 public interface FailEvent {
 
-    void process(PurchaseModel purchase);
+    void processedError(PurchaseModel purchase);
 }

@@ -22,7 +22,7 @@ public class ImageRequest {
         this.images = images;
     }
 
-    /* Getters and Setters */
+    /* Getters */
     public List <MultipartFile> getImages() {
         return images;
     }

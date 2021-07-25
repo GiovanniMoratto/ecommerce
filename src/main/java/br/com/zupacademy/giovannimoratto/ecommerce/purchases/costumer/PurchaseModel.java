@@ -65,7 +65,7 @@ public class PurchaseModel {
         this.transactions.add(newTransaction);
     }
 
-    public boolean successfullyProcessed() {
+    public boolean processed() {
         return !successfullyTransactions().isEmpty();
     }
 
@@ -76,10 +76,6 @@ public class PurchaseModel {
     /* Getters */
     public Long getId() {
         return id;
-    }
-
-    public Integer getQuantity() {
-        return quantity;
     }
 
     public ProductModel getProduct() {

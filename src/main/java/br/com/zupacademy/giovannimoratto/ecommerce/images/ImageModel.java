@@ -1,7 +1,6 @@
 package br.com.zupacademy.giovannimoratto.ecommerce.images;
 
 import br.com.zupacademy.giovannimoratto.ecommerce.products.ProductModel;
-import br.com.zupacademy.giovannimoratto.ecommerce.validations.annotations.ExistsId;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import org.hibernate.validator.constraints.URL;
 
@@ -45,7 +44,7 @@ public class ImageModel {
         this.product = product;
     }
 
-    /* Getters and Setters */
+    /* Getters */
     public String getLink() {
         return link;
     }

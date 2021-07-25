@@ -59,7 +59,7 @@ public class FeatureModel {
         return name.equals(that.name) && description.equals(that.description);
     }
 
-    /* Getters and Setters */
+    /* Getters */
     public String getName() {
         return name;
     }

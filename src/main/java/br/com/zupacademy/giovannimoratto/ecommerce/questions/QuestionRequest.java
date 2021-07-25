@@ -21,7 +21,7 @@ public class QuestionRequest {
         return new QuestionModel(title, product, user);
     }
 
-    /* Getters and Setters */
+    /* Setters */
     public void setTitle(String title) {
         this.title = title;
     }

@@ -66,7 +66,7 @@ public class ProductRequest {
         return new ProductModel(name, price, stockInformation, description, category, user, features);
     }
 
-    /* Getters and Setters */
+    /* Getters */
     public String getName() {
         return name;
     }

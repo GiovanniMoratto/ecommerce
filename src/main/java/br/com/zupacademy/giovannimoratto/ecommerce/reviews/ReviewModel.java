@@ -51,7 +51,7 @@ public class ReviewModel {
         this.user = user;
     }
 
-    /* Getters and Setters */
+    /* Getters */
     public Integer getLikes() {
         return likes;
     }

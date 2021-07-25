@@ -9,11 +9,13 @@ import javax.validation.constraints.NotNull;
 
 public class InvoiceRequest {
 
+    /* Attributes */
     @NotNull
     private Long idPurchase;
     @NotBlank
     private String product;
 
+    /* Getters */
     public Long getIdPurchase() {
         return idPurchase;
     }

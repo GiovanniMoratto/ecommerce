@@ -12,7 +12,6 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import javax.validation.Valid;
-import javax.validation.constraints.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.*;
@@ -172,23 +171,8 @@ public class ProductModel {
         return seller;
     }
 
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
     public Set <FeatureModel> getFeatures() {
         return features;
     }
 
-    public Set <ImageModel> getImages() {
-        return images;
-    }
-
-    public Set <ReviewModel> getReviews() {
-        return reviews;
-    }
-
-    public SortedSet <QuestionModel> getQuestions() {
-        return questions;
-    }
 }

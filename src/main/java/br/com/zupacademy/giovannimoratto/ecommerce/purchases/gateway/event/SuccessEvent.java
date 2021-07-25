@@ -8,5 +8,5 @@ import br.com.zupacademy.giovannimoratto.ecommerce.purchases.costumer.PurchaseMo
 
 public interface SuccessEvent {
 
-    void process(PurchaseModel purchase);
+    void processedOk(PurchaseModel purchase);
 }

@@ -13,9 +13,8 @@ import java.util.Set;
  */
 
 @Service
-public class PurchaseEventService {
+public class EventService {
 
-    /* Attributes */
     private final Set <SuccessEvent> successEvents;
     private final Set <FailEvent> failEvents;
     private final Invoice invoice;
@@ -23,8 +22,8 @@ public class PurchaseEventService {
     private final SellersRaking raking;
 
     /* Constructors */
-    public PurchaseEventService(Set <SuccessEvent> successEvents, Set <FailEvent> failEvents,
-                                Invoice invoice, Email email, SellersRaking raking) {
+    public EventService(Set <SuccessEvent> successEvents, Set <FailEvent> failEvents,
+                        Invoice invoice, Email email, SellersRaking raking) {
         this.successEvents = successEvents;
         this.failEvents = failEvents;
         this.invoice = invoice;
@@ -35,14 +34,14 @@ public class PurchaseEventService {
     /* Methods */
     public void process(PurchaseModel purchase) {
         // Use the check methods in PurchaseModel to proceed if the actions
-        if (purchase.successfullyProcessed()) {
-            successEvents.forEach(event -> event.process(purchase));
+        if (purchase.processed()) {
+            successEvents.forEach(event -> event.processedOk(purchase));
             invoice.getInvoice(purchase);
             raking.getRaking(purchase);
             email.purchaseSuccessful(purchase);
         }
         else {
-            failEvents.forEach(event -> event.process(purchase));
+            failEvents.forEach(event -> event.processedError(purchase));
             email.purchaseFail(purchase);
         }
     }
