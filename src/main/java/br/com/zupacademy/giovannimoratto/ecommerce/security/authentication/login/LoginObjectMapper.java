@@ -1,6 +1,6 @@
 package br.com.zupacademy.giovannimoratto.ecommerce.security.authentication.login;
 
-import br.com.zupacademy.giovannimoratto.ecommerce.add_user.UserModel;
+import br.com.zupacademy.giovannimoratto.ecommerce.users.UserModel;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 

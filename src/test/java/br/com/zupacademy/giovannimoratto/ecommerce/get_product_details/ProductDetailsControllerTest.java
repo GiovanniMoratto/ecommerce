@@ -1,18 +1,18 @@
 package br.com.zupacademy.giovannimoratto.ecommerce.get_product_details;
 
-import br.com.zupacademy.giovannimoratto.ecommerce.add_category.CategoryModel;
-import br.com.zupacademy.giovannimoratto.ecommerce.add_category.CategoryRepository;
-import br.com.zupacademy.giovannimoratto.ecommerce.add_product.ProductModel;
-import br.com.zupacademy.giovannimoratto.ecommerce.add_product.ProductRepository;
-import br.com.zupacademy.giovannimoratto.ecommerce.add_product.product_features.FeatureRequest;
-import br.com.zupacademy.giovannimoratto.ecommerce.add_product_images.ImageModel;
-import br.com.zupacademy.giovannimoratto.ecommerce.add_product_images.ImageRepository;
-import br.com.zupacademy.giovannimoratto.ecommerce.add_product_question.QuestionModel;
-import br.com.zupacademy.giovannimoratto.ecommerce.add_product_question.QuestionRepository;
-import br.com.zupacademy.giovannimoratto.ecommerce.add_product_review.ReviewModel;
-import br.com.zupacademy.giovannimoratto.ecommerce.add_product_review.ReviewRepository;
-import br.com.zupacademy.giovannimoratto.ecommerce.add_user.UserModel;
-import br.com.zupacademy.giovannimoratto.ecommerce.add_user.UserRepository;
+import br.com.zupacademy.giovannimoratto.ecommerce.categories.CategoryModel;
+import br.com.zupacademy.giovannimoratto.ecommerce.categories.CategoryRepository;
+import br.com.zupacademy.giovannimoratto.ecommerce.images.ImageModel;
+import br.com.zupacademy.giovannimoratto.ecommerce.images.ImageRepository;
+import br.com.zupacademy.giovannimoratto.ecommerce.products.ProductModel;
+import br.com.zupacademy.giovannimoratto.ecommerce.products.ProductRepository;
+import br.com.zupacademy.giovannimoratto.ecommerce.products.product_features.FeatureRequest;
+import br.com.zupacademy.giovannimoratto.ecommerce.questions.QuestionModel;
+import br.com.zupacademy.giovannimoratto.ecommerce.questions.QuestionRepository;
+import br.com.zupacademy.giovannimoratto.ecommerce.reviews.ReviewModel;
+import br.com.zupacademy.giovannimoratto.ecommerce.reviews.ReviewRepository;
+import br.com.zupacademy.giovannimoratto.ecommerce.users.UserModel;
+import br.com.zupacademy.giovannimoratto.ecommerce.users.UserRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
@@ -23,7 +23,9 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static java.math.BigDecimal.valueOf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;

@@ -1,7 +1,7 @@
 package br.com.zupacademy.giovannimoratto.ecommerce.authentication;
 
-import br.com.zupacademy.giovannimoratto.ecommerce.add_user.UserRepository;
-import br.com.zupacademy.giovannimoratto.ecommerce.add_user.UserRequest;
+import br.com.zupacademy.giovannimoratto.ecommerce.users.UserRepository;
+import br.com.zupacademy.giovannimoratto.ecommerce.users.UserRequest;
 import br.com.zupacademy.giovannimoratto.ecommerce.security.authentication.login.LoginRequest;
 import com.google.gson.Gson;
 import org.junit.jupiter.api.*;
