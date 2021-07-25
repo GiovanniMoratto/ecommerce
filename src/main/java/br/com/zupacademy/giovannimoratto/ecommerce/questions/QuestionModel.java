@@ -3,6 +3,7 @@ package br.com.zupacademy.giovannimoratto.ecommerce.questions;
 import br.com.zupacademy.giovannimoratto.ecommerce.products.ProductModel;
 import br.com.zupacademy.giovannimoratto.ecommerce.users.UserModel;
 import br.com.zupacademy.giovannimoratto.ecommerce.validations.annotations.ExistsId;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
@@ -32,6 +33,7 @@ public class QuestionModel implements Comparable <QuestionModel> {
     private LocalDateTime createdAt;
     @ManyToOne
     @JoinColumn(name = "id_produto")
+    @JsonBackReference
     private ProductModel product;
     @ManyToOne
     @JoinColumn(name = "id_usuario")

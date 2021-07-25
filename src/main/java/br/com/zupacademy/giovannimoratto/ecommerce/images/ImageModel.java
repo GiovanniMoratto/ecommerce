@@ -2,6 +2,7 @@ package br.com.zupacademy.giovannimoratto.ecommerce.images;
 
 import br.com.zupacademy.giovannimoratto.ecommerce.products.ProductModel;
 import br.com.zupacademy.giovannimoratto.ecommerce.validations.annotations.ExistsId;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import org.hibernate.validator.constraints.URL;
 
 import javax.persistence.*;
@@ -30,6 +31,7 @@ public class ImageModel {
     @NotNull
     @ManyToOne(optional = false)
     @JoinColumn(name = "id_produto", nullable = false)
+    @JsonBackReference
     private ProductModel product;
 
     /* Constructors */

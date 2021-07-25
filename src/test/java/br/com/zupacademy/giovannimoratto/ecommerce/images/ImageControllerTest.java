@@ -242,7 +242,7 @@ class ImageControllerTest {
         long id = 1L;
         String urlTemplate = "/api/product/" + id + "/add-images";
         String imageRequestAttribute = "images";
-        String url = "http://bucket.io/";
+        String url = "http://ecommerce/files.com/";
         String fileName1 = "casper.jpg";
         String fileName2 = "cat.jpg";
         String link1 = url + fileName1;

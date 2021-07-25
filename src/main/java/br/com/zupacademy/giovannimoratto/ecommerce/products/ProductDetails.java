@@ -24,7 +24,7 @@ public class ProductDetails {
     private final String description;
     private final double averageLikes;
     private final int numberOfLikes;
-    private final Set <ReviewModel> reviews;
+    private final Set <Map <String, String>> reviews;
     private final SortedSet <String> questions;
     private final Integer stockInformation;
     private final int numberOfReviews;
@@ -38,7 +38,8 @@ public class ProductDetails {
         this.price = product.getPrice();
         this.features = product.mapFeatures(FeaturesDetails::new);
         this.description = product.getDescription();
-        this.reviews = product.getReviews();
+        this.reviews = product.mapReviews(review ->
+                Map.of("title", review.getTitle(), "comment", review.getComment()));
         this.averageLikes = product.averageLikes();
         this.numberOfLikes = product.numberOfLikes();
         this.questions = product.mapQuestions(QuestionModel::getTitle);
@@ -77,7 +78,7 @@ public class ProductDetails {
         return numberOfLikes;
     }
 
-    public Set <ReviewModel> getReviews() {
+    public Set <Map <String, String>> getReviews() {
         return reviews;
     }
 
@@ -100,4 +101,5 @@ public class ProductDetails {
     public String getSeller() {
         return seller;
     }
+
 }

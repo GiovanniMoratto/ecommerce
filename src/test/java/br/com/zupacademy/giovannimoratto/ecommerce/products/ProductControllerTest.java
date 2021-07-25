@@ -352,7 +352,6 @@ class ProductControllerTest {
                 1L,
                 List.of(
                         new FeatureRequest("Test", "Test"),
-                        new FeatureRequest("Test", "Test"),
                         new FeatureRequest("Test", "Test")
                        )
         );

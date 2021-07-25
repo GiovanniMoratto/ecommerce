@@ -2,6 +2,7 @@ package br.com.zupacademy.giovannimoratto.ecommerce.reviews;
 
 import br.com.zupacademy.giovannimoratto.ecommerce.products.ProductModel;
 import br.com.zupacademy.giovannimoratto.ecommerce.users.UserModel;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.*;
 import javax.validation.Valid;
@@ -28,6 +29,7 @@ public class ReviewModel {
     private String comment;
     @ManyToOne
     @JoinColumn(name = "id_produto")
+    @JsonBackReference
     private ProductModel product;
     @ManyToOne
     @JoinColumn(name = "id_usuario")

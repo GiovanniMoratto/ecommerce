@@ -7,6 +7,7 @@ import br.com.zupacademy.giovannimoratto.ecommerce.products.product_features.Fea
 import br.com.zupacademy.giovannimoratto.ecommerce.questions.QuestionModel;
 import br.com.zupacademy.giovannimoratto.ecommerce.reviews.ReviewModel;
 import br.com.zupacademy.giovannimoratto.ecommerce.users.UserModel;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
@@ -50,18 +51,22 @@ public class ProductModel {
     @CreationTimestamp
     @Column(name = "data_criacao", nullable = false)
     private LocalDateTime createdAt;
-
-    @OneToMany(mappedBy = "product", cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "product", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    @Column(nullable = true)
+    @JsonManagedReference
     private Set <FeatureModel> features = new HashSet <>();
-
-    @OneToMany(mappedBy = "product", cascade = CascadeType.MERGE)
+    @OneToMany(mappedBy = "product", cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+    @Column(nullable = true)
+    @JsonManagedReference
     private Set <ImageModel> images = new HashSet <>();
-
-    @OneToMany(mappedBy = "product", cascade = CascadeType.MERGE)
+    @OneToMany(mappedBy = "product", cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+    @Column(nullable = true)
+    @JsonManagedReference
     private Set <ReviewModel> reviews = new HashSet <>();
-
     @OrderBy("titulo asc")
-    @OneToMany(mappedBy = "product", cascade = CascadeType.MERGE)
+    @OneToMany(mappedBy = "product", cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+    @Column(nullable = true)
+    @JsonManagedReference
     private SortedSet <QuestionModel> questions = new TreeSet <>();
 
     /* Constructors */

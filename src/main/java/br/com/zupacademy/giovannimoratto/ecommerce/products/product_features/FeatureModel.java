@@ -1,6 +1,7 @@
 package br.com.zupacademy.giovannimoratto.ecommerce.products.product_features;
 
 import br.com.zupacademy.giovannimoratto.ecommerce.products.ProductModel;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -27,6 +28,7 @@ public class FeatureModel {
     @NotNull
     @ManyToOne
     @JoinColumn(name = "produto", nullable = false)
+    @JsonBackReference
     private ProductModel product;
 
     /* Constructors */
